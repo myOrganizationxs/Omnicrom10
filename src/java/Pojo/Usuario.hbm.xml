@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Usuario" table="usuario" catalog="elipso" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="idUsuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cuenta" class="Pojo.Cuenta" fetch="join">
+            <column name="Cuenta_idCuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nodo" class="Pojo.Nodo" fetch="select">
+            <column name="Nodo_idNodo" not-null="true" />
+        </many-to-one>
+        <property name="apellidoMaterno" type="string">
+            <column name="Apellido_materno" length="30" />
+        </property>
+        <property name="apellidoPaterno" type="string">
+            <column name="Apellido_paterno" length="30" />
+        </property>
+        <property name="nombreUsu" type="string">
+            <column name="Nombre_usu" length="40" />
+        </property>
+        <property name="fechaDeNacimiento" type="date">
+            <column name="Fecha_de_nacimiento" length="10" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="Foto" />
+        </property>
+        <property name="correoElectro" type="string">
+            <column name="Correo_electro" length="50" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="Telefono" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

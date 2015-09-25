@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Objetivos" table="objetivos" catalog="elipso" optimistic-lock="version">
+        <id name="idObjetivos" type="java.lang.Integer">
+            <column name="idObjetivos" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="orbita" class="Pojo.Orbita" fetch="select">
+            <column name="Orbita_idOrbita" not-null="true" />
+        </many-to-one>
+        <property name="nombreObjetivo" type="string">
+            <column name="Nombre_objetivo" length="45" />
+        </property>
+        <property name="indicador" type="string">
+            <column name="Indicador" length="45" />
+        </property>
+        <property name="tipoObjetivo" type="java.lang.Integer">
+            <column name="Tipo_objetivo" />
+        </property>
+    </class>
+</hibernate-mapping>

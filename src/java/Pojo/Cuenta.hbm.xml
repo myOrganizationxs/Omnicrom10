@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Cuenta" table="cuenta" catalog="elipso" optimistic-lock="version">
+        <id name="idCuenta" type="java.lang.Integer">
+            <column name="idCuenta" />
+            <generator class="identity" />
+        </id>
+        <property name="ultimaConexion" type="date">
+            <column name="Ultima_conexion" length="10" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="10" not-null="true" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="contrasena" length="25" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="Usuario" length="25" not-null="true" unique="true" />
+        </property>
+        <property name="tipoCuenta" type="java.lang.Integer">
+            <column name="Tipo_cuenta" />
+        </property>
+        <property name="estado" type="java.lang.Integer">
+            <column name="Estado" />
+        </property>
+        <property name="modo" type="java.lang.Integer">
+            <column name="modo" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Cuenta_idCuenta" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Organizacion" table="organizacion" catalog="elipso" optimistic-lock="version">
+        <id name="idOrganizacion" type="java.lang.Integer">
+            <column name="idOrganizacion" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="50" />
+        </property>
+        <property name="estadoorg" type="string">
+            <column name="estadoorg" length="15" />
+        </property>
+        <set name="nodos" table="nodo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Organizacion_idOrganizacion" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.Nodo" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="content">
+                <p:dataTable var="" value="" paginator="true" rows="4" >
+                <f:facet name="header">
+                     Perspectiva Financiera
+                </f:facet>    
+    
+                                       
+    <p:column headerText="Objetivos" width="350">
+        <p:inputText style="width:320px; height:40px; margin-left: 5px;"></p:inputText>
+    </p:column>
+        
+    <p:column headerText="Indicadores">
+        <h:outputText value="" />
+    </p:column>
+                        
+    <p:column headerText="Objetivo" width="200">
+        <h:outputText value="" />
+    </p:column>
+                        
+    <p:column headerText="Actual" width="200">
+        <h:outputText value="" />
+    </p:column>
+                        
+         <p:column headerText="Anterior" width="200">
+        
+         </p:column>
+                        
+         
+</p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

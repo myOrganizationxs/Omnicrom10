@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Mensajes" table="mensajes" catalog="elipso" optimistic-lock="version">
+        <id name="idMensajes" type="java.lang.Integer">
+            <column name="idMensajes" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nodo" class="Pojo.Nodo" fetch="select">
+            <column name="Nodo_idNodo" not-null="true" />
+        </many-to-one>
+        <property name="emisor" type="java.lang.Integer">
+            <column name="Emisor" />
+        </property>
+        <property name="receptor" type="java.lang.Integer">
+            <column name="Receptor" />
+        </property>
+        <property name="peticion" type="string">
+            <column name="Peticion" length="150" />
+        </property>
+        <property name="promesa" type="string">
+            <column name="Promesa" length="10" />
+        </property>
+        <property name="tiempoProceso" type="timestamp">
+            <column name="Tiempo_proceso" length="19" />
+        </property>
+        <property name="horaEnvio" type="timestamp">
+            <column name="Hora_envio" length="19" />
+        </property>
+        <property name="horaRecibido" type="timestamp">
+            <column name="Hora_recibido" length="19" />
+        </property>
+        <property name="revocaciones" type="java.lang.Integer">
+            <column name="revocaciones" />
+        </property>
+        <property name="tiempoProceso2" type="timestamp">
+            <column name="Tiempo_proceso2" length="19" />
+        </property>
+        <property name="estadoMensaje" type="java.lang.Integer">
+            <column name="estado_mensaje" />
+        </property>
+    </class>
+</hibernate-mapping>
