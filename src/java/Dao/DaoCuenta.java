@@ -42,13 +42,13 @@ public class DaoCuenta implements Cuentas
             query.setParameter("idCuenta", idcuenta);
             //JOptionPane.showMessageDialog(null,"LLega aqui 1");
             List todos = query.list();                         
-            JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+todos);
+            //JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+todos);
 
             return todos;
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null,e);
+            //JOptionPane.showMessageDialog(null,e);
         }
         return null;
     }
@@ -67,7 +67,7 @@ public class DaoCuenta implements Cuentas
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null,e);
+            //JOptionPane.showMessageDialog(null,e);
         }
         return null;
     }
@@ -80,13 +80,13 @@ public class DaoCuenta implements Cuentas
             query.setParameter("idCuenta", idcuenta);
             //JOptionPane.showMessageDialog(null,"LLega aqui 1");
             List lista = (List) query.list();                         
-            JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+lista);
+            //JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+lista);
 
             return lista;
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null,e);
+            //JOptionPane.showMessageDialog(null,e);
         }
         return null;
     }

@@ -5,7 +5,8 @@
  */
 package Dao;
 
-import Intefaces.Mensajes;
+import Intefaces.Cuentas;
+import Intefaces.Organizacion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
@@ -15,27 +16,28 @@ import org.hibernate.Session;
  *
  * @author sergio
  */
-public class DaoMensajes implements Mensajes{
+public class DaoOrganizacion implements Organizacion
+{
 
     @Override
-    public List getByIdcuentaMensaje(Session session, Integer idcuenta) throws Exception {
+    public String getByIdcuentaOrganizacion(Session session, Integer idcuenta) throws Exception {
         
         try{
-            String hql="from Cuenta c inner join c.usuarios u inner join u.nodo n inner join n.mensajeses where IdCuenta=:idCuenta";
+            String hql="select o.nombre from Cuenta c  inner join c.usuarios u inner join u.nodo n inner join n.organizacion o where c.idCuenta=:idCuenta";
             Query query=session.createQuery(hql);
             query.setParameter("idCuenta", idcuenta);
             //JOptionPane.showMessageDialog(null,"LLega aqui 1");
-            List lista = (List) query.list();                         
-            //JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+lista);
+            String Organizacion = (String) query.uniqueResult();                         
+            //JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+Organizacion);
 
-            return lista;
+            return Organizacion;
         }
         catch(Exception e)
         {
             //JOptionPane.showMessageDialog(null,e);
         }
         return null;
+
     }
-    
     
 }

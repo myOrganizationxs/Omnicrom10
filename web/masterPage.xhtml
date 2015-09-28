@@ -22,12 +22,12 @@
     <h:body> 
         
         <h:form id="form1">
-            <h:outputText rendered="#{MbNombreUsu.nombreComplete}" value="#{MbNombreUsu.nombreCompleto}"/>
+            <h:outputText rendered="#{MbSession.nombreComplete}"/>
             
         <nav class="navbar navbar-inverse" style="float:top; background: black !important; box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);" role="navigation">
             <div class="navbar-header-inverse">
                 <a class="navbar-text">ELIPSO</a> 
-                <h:outputText class="navbar-brand" style="color:white;" value="#{MbNombreUsu.nombreCompleto}"/>
+                <h:outputText class="navbar-brand" style="color:white;" value="#{MbSession.nombreCompleto}"/>
                 <a class="navbar-text" value=""></a>  
                 <a class="navbar-brand" >Inicio</a>
                 <a class="navbar-brand" >Mi orbita</a>

@@ -8,7 +8,10 @@ package ManagedBeanSession;
 import Dao.DaoCuenta;
 import HibernateUtil.HibernateUtil;
 import Pojo.Cuenta;
+import Pojo.Usuario;
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,13 +34,14 @@ public class MbSession implements Serializable{
     
     private String Usuario;
     private String contrasenia;
+    private String NombreCompleto;
     /**
      * Creates a new instance of MbSession
      */
     public MbSession() 
     {
         HttpSession miSession=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        miSession.setMaxInactiveInterval(5000);
+        miSession.setMaxInactiveInterval(50000);
     }
 
     public String login()
@@ -70,7 +74,7 @@ public class MbSession implements Serializable{
             this.contrasenia=null;       
             HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             httpSession.invalidate();
-        
+            
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error: ","Usuario Incorrecto"));
             
             return "/login";
@@ -101,8 +105,46 @@ public class MbSession implements Serializable{
         this.contrasenia=null;       
         HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         httpSession.invalidate();
-        return "/login.xhtml";
+        return "/login";
     }
+    
+    public String getNombreComplete()
+    {
+        try
+        {
+            if(Usuario!=null)
+            {
+                DaoCuenta daoCuenta=new DaoCuenta();
+                this.session=HibernateUtil.getSessionFactory().openSession();
+                this.transaction=this.session.beginTransaction();          
+                HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);         
+                List<Object[]> lista =daoCuenta.getByIdcuentaNombre(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));                    
+                for (Object[] alist : lista)
+                {
+                    NombreCompleto=(String) alist[0]+" "+alist[1]+" "+alist[2];
+                }
+                this.transaction.commit();
+                return NombreCompleto;
+            }
+                return null;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }           
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            return "/interfazUsuario";
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    } 
             
     public String getUsuario() {
         return Usuario;
@@ -118,5 +160,14 @@ public class MbSession implements Serializable{
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }  
+    } 
+
+    public String getNombreCompleto() {
+        return NombreCompleto;
+    }
+
+    public void setNombreCompleto(String NombreCompleto) {
+        this.NombreCompleto = NombreCompleto;
+    }
+    
 }
