@@ -5,6 +5,8 @@
  */
 package Intefaces;
 
+
+import Pojo.Nodo;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -12,7 +14,8 @@ import org.hibernate.Session;
  *
  * @author sergio
  */
-public interface Organizacion 
-{
-    public List getByIdcuentaOrganizacion(Session session,Integer idcuenta)throws Exception;
+public interface Nodos {
+    
+    public List<Nodo> getByOrganizacion(Session session,int IdOrganizacion, int IdNodo)throws Exception;
+    
 }

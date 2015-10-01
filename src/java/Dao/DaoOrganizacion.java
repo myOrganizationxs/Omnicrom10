@@ -20,17 +20,16 @@ public class DaoOrganizacion implements Organizacion
 {
 
     @Override
-    public String getByIdcuentaOrganizacion(Session session, Integer idcuenta) throws Exception {
+    public List getByIdcuentaOrganizacion(Session session, Integer idcuenta) throws Exception {
         
         try{
-            String hql="select o.nombre from Cuenta c  inner join c.usuarios u inner join u.nodo n inner join n.organizacion o where c.idCuenta=:idCuenta";
+            String hql="select o.nombre, o.idOrganizacion from Cuenta c  inner join c.usuarios u inner join u.nodo n inner join n.organizacion o where c.idCuenta=:idCuenta";
             Query query=session.createQuery(hql);
             query.setParameter("idCuenta", idcuenta);
             //JOptionPane.showMessageDialog(null,"LLega aqui 1");
-            String Organizacion = (String) query.uniqueResult();                         
+            List listaOrga = query.list();                         
             //JOptionPane.showMessageDialog(null,"mensaje en lista de objetos del pojo"+Organizacion);
-
-            return Organizacion;
+            return listaOrga;
         }
         catch(Exception e)
         {

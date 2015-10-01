@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <body>
 
@@ -144,15 +145,13 @@
                
                 
         <div id="barraArbol">
-            <form>
-            <p:tree style="background:black; border:none; border-radius:10px;" value="#{treeBasicView.root}" var="node" dynamic="true">
-                <p:treeNode>
-                    <h:outputText style="color:whitesmoke" value="#{node}" />   
-                    
-                </p:treeNode>
-            </p:tree>
-                <p:commandButton style="font-weight:bold;" value="Enviar Mensaje" actionListener="#{MbEnviarMensaje.paginaMensaje}"></p:commandButton>
-            </form>
+           <h:form>           
+               <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true">
+                    <p:treeNode>
+                        <h:outputText value="#{node}" />
+                    </p:treeNode>
+             </p:tree>
+        </h:form>
        </div>
                 
         

@@ -48,8 +48,13 @@ public class MbViewOrganizacion implements Serializable{
                 this.session=HibernateUtil.getSessionFactory().openSession();
                 this.transaction=this.session.beginTransaction();          
                 HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);         
-                Organizacion=daoOrganizacion.getByIdcuentaOrganizacion(session, (Integer) sessionUsuario.getAttribute("idcuenta"));                    
-                
+                List<Object[]> listOrganizacion=daoOrganizacion.getByIdcuentaOrganizacion(session, (Integer) sessionUsuario.getAttribute("idcuenta"));                    
+                for (Object[] alist : listOrganizacion)
+                {
+                    Organizacion=(String) alist[0];
+                    HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
+                    httpSession.setAttribute("idorganizacion",alist[1]);                      
+                }
                 this.transaction.commit();
                 return Organizacion;
         }
