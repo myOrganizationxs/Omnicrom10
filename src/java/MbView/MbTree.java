@@ -6,6 +6,7 @@
 package MbView;
 
 import Dao.DaoNodo;
+import Dao.DaoOrbita;
 import Dao.DaoOrganizacion;
 import HibernateUtil.HibernateUtil;
 import static MbView.NodeBean.getListe;
@@ -60,7 +61,9 @@ public class MbTree implements Serializable
         
         for(Object[] itr:liste)
         {
-            donanim=new DefaultTreeNode(itr[1], root);
+            DaoOrbita daoOrbita= new DaoOrbita();
+            String nombredep= daoOrbita.getByIdNodoOrg(session,(int) itr[0]);
+            donanim=new DefaultTreeNode(nombredep+"("+itr[1]+")", root);
             idNodo=(int) itr[0];            
         }
         recursive(liste,idNodo,donanim);  
@@ -70,12 +73,22 @@ public class MbTree implements Serializable
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         lista=daoNodo.getByOrganizacion(session,(Integer) sessionUsuario.getAttribute("idorganizacion"),id);
         for(Object[] n:lista)
+        {
+            DaoOrbita daoOrbita= new DaoOrbita();
+            String nombredep= daoOrbita.getByIdNodoOrg(session,(int) n[0]);
+            if(nombredep!=null)
             {
-                TreeNode childNode=new DefaultTreeNode(n[1], node);
-                //Veritabaninda kategori tablosunu tree view seklinde dynamic olarak olusturmayi saglar.;
+                TreeNode childNode=new DefaultTreeNode(nombredep+"("+n[1]+")", node);
                 idNodo=(int) n[0];    
                 recursive(lista,idNodo,childNode);
             }
+            else
+            {
+                TreeNode childNode=new DefaultTreeNode(n[1], node);
+                idNodo=(int) n[0];    
+                recursive(lista,idNodo,childNode);
+            }
+        }
     }
 
  

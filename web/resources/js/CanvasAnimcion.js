@@ -63,7 +63,7 @@
 	// Geometría
 	
         
-        var material = new THREE.LineBasicMaterial({color:0x2F4F4F, opacity:1});
+        var material = new THREE.LineBasicMaterial({color:0xffffff, opacity:1});
 	var ellipse = new THREE.EllipseCurve(0, 0, 30, 20, 0, 2 * Math.PI, false);
 	var ellipsePath = new THREE.CurvePath();
 		ellipsePath.add(ellipse);
