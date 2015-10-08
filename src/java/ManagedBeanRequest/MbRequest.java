@@ -44,17 +44,12 @@ public class MbRequest implements Serializable{
         
         try
         {
-            DaoCuenta daoCuenta=new DaoCuenta();
-            
+            DaoCuenta daoCuenta=new DaoCuenta();            
             this.session=HibernateUtil.getSessionFactory().openSession();
-            this.transaccion=this.session.beginTransaction();
-            
-            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-           
-            List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));
-            
-            this.transaccion.commit();
-            
+            this.transaccion=this.session.beginTransaction();            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
+            List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
+            this.transaccion.commit();           
             return lista;
         }
         catch(Exception ex)

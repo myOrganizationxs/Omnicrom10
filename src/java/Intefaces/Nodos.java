@@ -17,5 +17,6 @@ import org.hibernate.Session;
 public interface Nodos {
     
     public List<Nodo> getByOrganizacion(Session session,int IdOrganizacion, int IdNodo)throws Exception;
+    public List<Object[]> getByIdNodo(Session session,int IdNodo, int IdOrganizacion)throws Exception;
     
 }

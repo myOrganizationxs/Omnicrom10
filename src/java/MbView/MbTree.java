@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
@@ -42,10 +43,10 @@ public class MbTree implements Serializable
     private TreeNode root;
     private TreeNode donanim;
     private static  List<Object[]> liste;
-    private List<Object[]> subList2;
-    private static List<Object[]> araListe;
     private DaoNodo daoNodo;
     private int idNodo;
+    private int NumeroDeNodos;
+    private List<Object[]> ListaNodosHijos;
  
     public MbTree() throws Exception 
     { 
@@ -90,8 +91,47 @@ public class MbTree implements Serializable
             }
         }
     }
-
- 
+    
+    public List getNodoCentro()
+    {
+        session=null;
+        transaction=null;
+        try
+        {
+            DaoNodo daoNodo=new DaoNodo();
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();          
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            NumeroDeNodos=(Integer) sessionUsuario.getAttribute("idNodo");
+            ListaNodosHijos=daoNodo.getByIdNodo(session, NumeroDeNodos,(Integer) sessionUsuario.getAttribute("idorganizacion"));
+            return ListaNodosHijos;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }           
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            return null;
+        }      
+    }
+    public Integer getNodoHijo()
+    {
+        try
+        {
+            return NumeroDeNodos;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }           
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            return null;
+        }           
+    }
     public TreeNode getRoot() {
         return root;
     }
@@ -110,6 +150,22 @@ public class MbTree implements Serializable
 
     public void setIdNodo(int idNodo) {
         this.idNodo = idNodo;
+    }
+
+    public int getNumeroDeNodos() {
+        return NumeroDeNodos;
+    }
+
+    public void setNumeroDeNodos(int NumeroDeNodos) {
+        this.NumeroDeNodos = NumeroDeNodos;
+    }
+
+    public List<Object[]> getListaNodosHijos() {
+        return ListaNodosHijos;
+    }
+
+    public void setListaNodosHijos(List<Object[]> ListaNodosHijos) {
+        this.ListaNodosHijos = ListaNodosHijos;
     }
     
 }

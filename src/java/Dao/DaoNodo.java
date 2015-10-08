@@ -39,8 +39,23 @@ public class DaoNodo implements Nodos
 
     }
 
-    public List<Object[]> getByOrganizacion(Session session, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public List<Object[]> getByIdNodo(Session session, int idPadre, int idOrganizacion) throws Exception {
+        try 
+        {
+            //select object(o) from Nodo as o            
+            String hql="Select n.idNodo from Nodo n inner join n.organizacion o where n.idPadre=:idPadre and o.idOrganizacion=:idOrganizacion";
+            Query query=session.createQuery(hql);
+            query.setParameter("idPadre",idPadre); 
+            query.setParameter("idOrganizacion",idOrganizacion);
+            List lista =query.list();    
+            return lista;
+        }
+        catch(Exception e)
+        {
+            //JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
     }
 
 }

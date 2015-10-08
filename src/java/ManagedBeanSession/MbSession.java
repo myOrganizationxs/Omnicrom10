@@ -73,8 +73,7 @@ public class MbSession implements Serializable{
             this.Usuario=null;
             this.contrasenia=null;       
             HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            httpSession.invalidate();
-            
+            httpSession.invalidate();           
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error: ","Usuario Incorrecto"));
             
             return "/login";
@@ -122,6 +121,8 @@ public class MbSession implements Serializable{
                 for (Object[] alist : lista)
                 {
                     NombreCompleto=(String) alist[0]+" "+alist[1]+" "+alist[2];
+                    HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
+                    httpSession.setAttribute("idNodo", alist[3]);
                 }
                 this.transaction.commit();
                 return NombreCompleto;

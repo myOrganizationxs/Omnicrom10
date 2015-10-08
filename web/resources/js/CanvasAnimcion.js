@@ -5,8 +5,9 @@
  */
  
 /******************************* variables *******************/
-			//Preparamos el render
-	var Render=new THREE.WebGLRenderer();		
+			//Preparamos el render     
+        var NodosHijos= document.getElementById("NodosHijos").value;
+        var Render=new THREE.WebGLRenderer();		
         ////El escenario
 	var Escenario=new THREE.Scene();
         var keyboard = new THREEx.KeyboardState();
@@ -27,7 +28,7 @@
 	var Aspecto=Ancho/Alto;
 	var cerca=0.1;
 	var lejos=10000;
-
+        
 	//La cámara
 	var Camara=new THREE.PerspectiveCamera(Angulo,Aspecto,cerca,lejos);
         THREEx.WindowResize(Render,Camara);
@@ -36,6 +37,8 @@
 			
 			/******************************* inicio *******************/
 	function inicio(){
+        
+        
 	//Tamaño del render(resultado)
 	Render.setSize(Ancho,Alto);
 	//Se agrega el render al documento html
@@ -46,7 +49,7 @@
 	//Acercamos la cámara en z es profundidad para ver el punto
 	Camara.position.set(100,100,300);
 	//agregando la cámara al escenario
-        Camara.lookAt(Escenario.position);	
+        Camara.lookAt(Escenario.position);
 	Escenario.add(Camara);
 	crear_ellipse();
 	
@@ -61,7 +64,6 @@
 	
         function crear_ellipse(){	
 	// Geometría
-	
         
         var material = new THREE.LineBasicMaterial({color:0xffffff, opacity:1});
 	var ellipse = new THREE.EllipseCurve(0, 0, 30, 20, 0, 2 * Math.PI, false);
@@ -95,10 +97,9 @@
 	
 	domEvents.addEventListener(sphere, 'mouseover', function(event){
 		flag = false;
-                
             PF('dlg4').show();
-            
-        
+                     
+                   
         }, false)
 
 	domEvents.addEventListener(sphere, 'mouseout', function(event){
@@ -142,6 +143,7 @@
 		central.scale.y = 13;
 		central.scale.z = 13;
 		PF('dlg5').show();
+                alert(NodosHijos);
 		// window.location = 'https://www.facebook.com';
 	}, false)
 	// fin de DOM para cental
