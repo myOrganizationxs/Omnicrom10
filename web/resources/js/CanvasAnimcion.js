@@ -6,11 +6,17 @@
  
 /******************************* variables *******************/
 			//Preparamos el render     
-        
+        //obtener datos para crear los nodos
         var NodosHijos= document.getElementById("NodosHijos").value;
         var NodosHijos1= JSON.parse(NodosHijos);
-        var nodo="";
-        var i;
+        var nodo;
+        var nEsferas=0;                
+        for (var i=0; i<NodosHijos1.length; i++) 
+        {   
+            nodo =NodosHijos1[0];
+            nEsferas=nEsferas+i;
+        }			
+	
         
         var Render=new THREE.WebGLRenderer();		
         ////El escenario
@@ -24,7 +30,15 @@
         var anima;
         
 	var flag = true;
-	var sphere;
+	var sphere=new Array(nEsferas);
+        var sphereGeometry= new Array(nEsferas);
+        var sphereMaterial= new Array(nEsferas);
+        
+        //distancia entre nodos;
+        var distanciaEntrenodos=64/(nEsferas+1);
+        var distanciaSuma=0;
+        var arregloDeSuma=new Array(nEsferas);
+        
 	var controls;
 	var Ancho=window.innerWidth-50;
 	var Alto=window.innerHeight-50;
@@ -37,12 +51,7 @@
 	//La cámara
 	var Camara=new THREE.PerspectiveCamera(Angulo,Aspecto,cerca,lejos);
         THREEx.WindowResize(Render,Camara);
-        
-        for (i=0; i<NodosHijos1.length; i++) 
-        {   
-            nodo =NodosHijos1[0]; 
-        }			
-			
+		
 			
 			/******************************* inicio *******************/
 	function inicio(){
@@ -90,49 +99,45 @@
 	var central = new THREE.Mesh( central_geometry, central_material );
 	Escenario.add( central );
         
-        var sphereGeometry = new THREE.SphereGeometry( 2, 32, 32 ); 
-	var sphereMaterial = new THREE.MeshPhongMaterial( { color: 0x87CEEB } );
-		sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-		sphere.position.x = 30;
-	Escenario.add(sphere);
-        
-        var sub6_geometry = new THREE.SphereGeometry( 2, 20, 20 )
-	var sub6_material = new THREE.MeshPhongMaterial( { color: 0x87CEEB } ); //amarilla
-		sub6 = new THREE.Mesh( sub6_geometry, sub6_material );
-		sub6.position.x = 30;
-	Escenario.add(sub6);
-
-        var domEvents	= new THREEx.DomEvents(Camara, Render.domElement)
+       for (var i=0; i<=nEsferas; i++) 
+        {
+            sphereGeometry[i] = new THREE.SphereGeometry( 2, 32, 32 ); 
+            sphereMaterial[i] = new THREE.MeshPhongMaterial( { color: 0x87CEEB } );
+            sphere[i] = new THREE.Mesh(sphereGeometry[i], sphereMaterial[i]);
+            sphere[i].position.x = 30;
+            Escenario.add(sphere[i]);
+            arregloDeSuma[i]=distanciaSuma;
+            distanciaSuma=distanciaSuma+distanciaEntrenodos;
+     
+            var domEvents= new THREEx.DomEvents(Camara, Render.domElement)
 	
-	domEvents.addEventListener(sphere, 'mouseover', function(event){
+	domEvents.addEventListener(sphere[i], 'mouseover', function(event){
 		flag = false;
             PF('dlg4').show();
                      
                    
         }, false)
 
-	domEvents.addEventListener(sphere, 'mouseout', function(event){
+	domEvents.addEventListener(sphere[i], 'mouseout', function(event){
 		// animate(id);
 		flag = true;
-		sphere.scale.x = 1;
-		sphere.scale.y = 1;
-		sphere.scale.z = 1;
+		sphere[i].scale.x = 1;
+		sphere[i].scale.y = 1;
+		sphere[i].scale.z = 1;
                 
                 
                 }, false)
                 
-	domEvents.addEventListener(sphere, 'click', function(event){
-		sphere.position.x = 0;
-		sphere.position.y = 0;
-		sphere.position.z = 0;
-		sphere.scale.x = 16;
-		sphere.scale.y = 16;
-		sphere.scale.z = 16;
+	domEvents.addEventListener(sphere[i], 'click', function(event){
+		sphere[i].position.x = 0;
+		sphere[i].position.y = 0;
+		sphere[i].position.z = 0;
+		sphere[i].scale.x = 16;
+		sphere[i].scale.y = 16;
+		sphere[i].scale.z = 16;
                 
-                
-		
                 }, false)
-            
+        }
 	// DOM event para la central
 	domEvents.addEventListener(central, 'mouseover', function(event){flag = false;}, false)
 
@@ -152,7 +157,7 @@
 		central.scale.y = 13;
 		central.scale.z = 13;
 		PF('dlg5').show();
-                alert(NodosHijos+"  "+nodo+"  "+i);
+                alert(NodosHijos+"  "+nodo+"  "+nEsferas);
 		// window.location = 'https://www.facebook.com';
 	}, false)
 	// fin de DOM para cental
@@ -215,13 +220,13 @@
             
             
             if (flag==true) {
-		sub6.position.x = Math.sin(t6*0.1)*30;
-		sub6.position.z = Math.cos(t6*0.1)*20;
-		t6-=Math.PI/180*2;
 		
-		sphere.position.x = Math.sin(t*0.1)*30;
-		sphere.position.z = Math.cos(t*0.1)*20;
-		t-=Math.PI/180*2;
+                for (var i=0; i<=nEsferas; i++) 
+                {
+                    sphere[i].position.x = Math.sin(arregloDeSuma[i]*0.1)*30;
+                    sphere[i].position.z = Math.cos(arregloDeSuma[i]*0.1)*20;
+                    arregloDeSuma[i]-=Math.PI/180*2;
+                }
     };
         /*
         tiempo=0.001;
