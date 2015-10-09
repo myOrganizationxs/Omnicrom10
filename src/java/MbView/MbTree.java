@@ -12,6 +12,7 @@ import HibernateUtil.HibernateUtil;
 import static MbView.NodeBean.getListe;
 import Pojo.Nodo;
 import Util.KategorilerJpaController;
+import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
-
 /**
  *
  * @author sergio
@@ -104,6 +104,8 @@ public class MbTree implements Serializable
             HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             NumeroDeNodos=(Integer) sessionUsuario.getAttribute("idNodo");
             ListaNodosHijos=daoNodo.getByIdNodo(session, NumeroDeNodos,(Integer) sessionUsuario.getAttribute("idorganizacion"));
+            //Gson gson= new Gson();
+            //gson.toJson(ListaNodosHijos);       
             return ListaNodosHijos;
         }
         catch(Exception ex)

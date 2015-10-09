@@ -6,7 +6,12 @@
  
 /******************************* variables *******************/
 			//Preparamos el render     
+        
         var NodosHijos= document.getElementById("NodosHijos").value;
+        var NodosHijos1= JSON.parse(NodosHijos);
+        var nodo="";
+        var i;
+        
         var Render=new THREE.WebGLRenderer();		
         ////El escenario
 	var Escenario=new THREE.Scene();
@@ -32,7 +37,11 @@
 	//La cámara
 	var Camara=new THREE.PerspectiveCamera(Angulo,Aspecto,cerca,lejos);
         THREEx.WindowResize(Render,Camara);
-			
+        
+        for (i=0; i<NodosHijos1.length; i++) 
+        {   
+            nodo =NodosHijos1[0]; 
+        }			
 			
 			
 			/******************************* inicio *******************/
@@ -143,7 +152,7 @@
 		central.scale.y = 13;
 		central.scale.z = 13;
 		PF('dlg5').show();
-                alert(NodosHijos);
+                alert(NodosHijos+"  "+nodo+"  "+i);
 		// window.location = 'https://www.facebook.com';
 	}, false)
 	// fin de DOM para cental
