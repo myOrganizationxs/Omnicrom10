@@ -11,12 +11,11 @@
         var NodosHijos1= JSON.parse(NodosHijos);
         var nodo;
         var nEsferas=0;                
-        for (var i=0; i<NodosHijos1.length; i++) 
+        for (var i=1; i<NodosHijos1.length; i++) 
         {   
             nodo =NodosHijos1[0];
-            nEsferas=nEsferas+i;
+            nEsferas=nEsferas+1;
         }			
-	
         
         var Render=new THREE.WebGLRenderer();		
         ////El escenario
@@ -30,6 +29,7 @@
         var anima;
         
 	var flag = true;
+        var flags = new Array(nEsferas);
 	var sphere=new Array(nEsferas);
         var sphereGeometry= new Array(nEsferas);
         var sphereMaterial= new Array(nEsferas);
@@ -38,6 +38,7 @@
         var distanciaEntrenodos=64/(nEsferas+1);
         var distanciaSuma=0;
         var arregloDeSuma=new Array(nEsferas);
+        var domEventss = new Array(nEsferas);
         
 	var controls;
 	var Ancho=window.innerWidth-50;
@@ -98,7 +99,7 @@
 	var central_material = new THREE.MeshPhongMaterial( { color: 0x87CEEB  } );
 	var central = new THREE.Mesh( central_geometry, central_material );
 	Escenario.add( central );
-        
+
        for (var i=0; i<=nEsferas; i++) 
         {
             sphereGeometry[i] = new THREE.SphereGeometry( 2, 32, 32 ); 
@@ -108,36 +109,29 @@
             Escenario.add(sphere[i]);
             arregloDeSuma[i]=distanciaSuma;
             distanciaSuma=distanciaSuma+distanciaEntrenodos;
-     
-            var domEvents= new THREEx.DomEvents(Camara, Render.domElement)
+            
+        domEventss[i]= new THREEx.DomEvents(Camara, Render.domElement);
 	
-	domEvents.addEventListener(sphere[i], 'mouseover', function(event){
-		flag = false;
-            PF('dlg4').show();
-                     
-                   
+	domEventss[i].addEventListener(sphere[i], 'mouseover', function(event){
+		flags[i] = false;
+            PF('dlg4').show();                
+                    
         }, false)
 
-	domEvents.addEventListener(sphere[i], 'mouseout', function(event){
+	domEventss[i].addEventListener(sphere[i], 'mouseout', function(event){
 		// animate(id);
-		flag = true;
+		flags[i] = true;
 		sphere[i].scale.x = 1;
 		sphere[i].scale.y = 1;
 		sphere[i].scale.z = 1;
                 
-                
                 }, false)
                 
-	domEvents.addEventListener(sphere[i], 'click', function(event){
-		sphere[i].position.x = 0;
-		sphere[i].position.y = 0;
-		sphere[i].position.z = 0;
-		sphere[i].scale.x = 16;
-		sphere[i].scale.y = 16;
-		sphere[i].scale.z = 16;
-                
-                }, false)
+	domEventss[i].addEventListener(sphere[i], 'click', function(event){
+                    alert(i);
+                }, false)    
         }
+        var domEvents= new THREEx.DomEvents(Camara, Render.domElement);
 	// DOM event para la central
 	domEvents.addEventListener(central, 'mouseover', function(event){flag = false;}, false)
 
@@ -157,7 +151,7 @@
 		central.scale.y = 13;
 		central.scale.z = 13;
 		PF('dlg5').show();
-                alert(NodosHijos+"  "+nodo+"  "+nEsferas);
+                //alert(NodosHijos+"  "+nodo+"  "+nEsferas);
 		// window.location = 'https://www.facebook.com';
 	}, false)
 	// fin de DOM para cental
