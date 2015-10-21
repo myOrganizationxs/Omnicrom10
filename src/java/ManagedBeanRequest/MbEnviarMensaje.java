@@ -23,9 +23,17 @@ public class MbEnviarMensaje implements Serializable
         
     }
     
-    public String paginaMensaje()
+    public String enviarMensaje()
     {
         //JOptionPane.showMessageDialog(null,"hola");
-        return "/enviarMensaje";
+        return "/enviarMensaje?faces-redirect=true";
     }    
+    public String bandejaEntrada()
+    {
+        return "/bandejadeEntrada?faces-redirect=true";
+    }
+    public String bandejaSalida()
+    {
+        return "/bandejadeSalida?faces-redirect=true";
+    }
 }

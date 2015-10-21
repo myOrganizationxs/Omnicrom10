@@ -65,7 +65,8 @@ public class MbSession implements Serializable{
                     HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
                     httpSession.setAttribute("idcuenta", cuenta.getIdCuenta());                   
                     FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto: ","Usuario Establecido"));
-                    return "/interfazUsuario.xhtml";
+                    return "interfazUsuario.xhtml?faces-redirect=true";
+                    
                 }
             }
             
@@ -76,7 +77,7 @@ public class MbSession implements Serializable{
             httpSession.invalidate();           
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error: ","Usuario Incorrecto"));
             
-            return "/login";
+            return "login.xhtml?faces-redirect=true";
             
         }
         catch(Exception e)
@@ -86,7 +87,6 @@ public class MbSession implements Serializable{
                 transaction.rollback();
             }
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error",e.getMessage()));
-            
             return null;
         }       
         finally
@@ -104,7 +104,7 @@ public class MbSession implements Serializable{
         this.contrasenia=null;       
         HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         httpSession.invalidate();
-        return "/login";
+        return "/login?faces-redirect=true";
     }
     
     public String getNombreComplete()
