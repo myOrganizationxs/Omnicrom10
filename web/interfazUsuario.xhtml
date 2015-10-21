@@ -65,10 +65,14 @@
                         </h:panelGrid>
                         
                         <div style=" width:40px; height:40px; position:relative; top:-189px;">
-        
-                        <p:dialog  header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
-                            <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />
-                        </p:dialog>
+                        <h:form>
+                            <p:dialog  header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
+                                <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
+                                <p:commandButton value="Objetivos" actionListener="#{MbCambiarPagina.irMensajes}" />
+                             </p:dialog>
+                        </h:form>
+                            
+                       
                         
                         <p:dialog header="Vision" widgetVar="dlg2" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535">
                             <h:outputText value="Mision de la empresa" />
@@ -97,7 +101,7 @@
                                <p></p>
                                <p></p>
                                <p></p>
-                               <p:commandButton style=" margin-top: 30px; width:300px;" value="Proceso Central (PX)" type="button"  />
+                               <p:commandButton style=" margin-top: 30px; width:300px;" value="Proceso Central (PX)" type="button"  action="#{MbEnviarMensaje.paginaMensaje()}" />
                                <p></p>
                                <p></p>
                                <p:commandButton style="width:300px;" value="Perfil Cerebral" type="button"  />
@@ -164,8 +168,7 @@
         <h:outputScript library="js" name="info.js"/>   
         </div>
              
-            
-
+          
             </ui:define>
 
         </ui:composition>

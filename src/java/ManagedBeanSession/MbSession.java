@@ -65,7 +65,7 @@ public class MbSession implements Serializable{
                     HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
                     httpSession.setAttribute("idcuenta", cuenta.getIdCuenta());                   
                     FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto: ","Usuario Establecido"));
-                    return "/interfazUsuario";
+                    return "/interfazUsuario.xhtml";
                 }
             }
             
@@ -136,7 +136,7 @@ public class MbSession implements Serializable{
                 this.transaction.rollback();
             }           
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
-            return "/interfazUsuario";
+            return "/interfazUsuario.xhtml";
         }
         finally
         {

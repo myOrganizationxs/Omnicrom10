@@ -69,6 +69,23 @@
                 </p:column>  
             </p:dataTable>                  
         </h:form>
+        
+        <h:form>
+            <h:commandButton value="Boton" action="#{CambioPagina.cambioPaginaxs()}" />
+        </h:form>
+        
+        <h:form>
+            <h:panelGrid columns="1" cellpadding="5">
+                <p:commandButton value="Effects" type="button" onclick="PF('dig7').show();" /> 
+            </h:panelGrid>
+        </h:form>
+       
+        <h:form id="dialogform">
+            <p:dialog id="dialogo1" widgetVar="dig7" onHide="true">
+                <p:outputLabel value="que pedo"></p:outputLabel>
+                <h:commandButton value="Boton dialogo" action="#{CambioPagina.cambioPaginaxs()}" />
+            </p:dialog>
+        </h:form>
     </h:body>
 </html>
 
