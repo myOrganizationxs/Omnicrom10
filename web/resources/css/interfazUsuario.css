@@ -10,9 +10,6 @@ and open the template in the editor.
 
 body{
     width:100%;
-    max-height:700px;
-    overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 
@@ -30,8 +27,6 @@ body{
 .Titulos
 {
     font-size: 40px;
-    position:relative;
-    top:20px;
     
 }
 
@@ -40,7 +35,7 @@ body{
     width:100%; 
     height:40px;
     position:relative;
-    bottom:30px;
+    bottom:26px;
     border-radius: 10px 10px 0px 0px;
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
    
@@ -55,13 +50,9 @@ body{
 #render{
     width:67%;
     margin-left: 2%;
-    height:20px;
+    height:50px;
     position:relative;
-    top:-100px;
-    background:red;
-    display:visibility;
-    
-    
+    bottom:18px;
     
     
     
@@ -70,13 +61,11 @@ canvas{
 	background-image:url("#{resource['images:nebula-xneg.png']}");
 	/*margin-top: 15% !important;*/
         width: 100% !important;
-        height: 464px !important; 
+        height: 480px !important; 
         position:relative;
-        bottom:32px;
+        bottom:27px;
 	border-radius: 0px 0px 10px 10px;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
-        z-index: auto;
-        
         
     }
        
@@ -88,8 +77,8 @@ canvas{
     background-color: black;
     width:26%;
     position:relative;
-    bottom:70px;
-    height:442px;
+    top:16px;
+    height:462px;
     float:right;
     margin-right:2%;
     border-radius: 10px 10px 10px 10px;
@@ -111,21 +100,7 @@ canvas{
 .tituloDepa{
     color:whitesmoke; 
     position:relative; 
-    bottom:470px;
-    
-}
-
-.botonmenu{
-    
-    background:none; 
-    border:none; 
-    width:90px; 
-    text-shadow:none; 
-    font-weight: normal; 
-    color:#9d9d9d;
-    z-index:1;
-    position:relative;
-    left:0px;
+    bottom:502px;
 }
 
 
