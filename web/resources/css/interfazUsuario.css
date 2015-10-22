@@ -8,36 +8,20 @@ and open the template in the editor.
     Author     : jebus
 */
 
-#este{
-    float:left;
+body{
+    width:100%;
 }
 
-#coTop
-{
-    
-    
-    height:150px;
-    margin-top:-4px;
-}
 
 #mundo{
     background-image:url("#{resource['images:nebula-xneg.png']}");
-    width:300px;
+    width:26%;
     height:114px;
     float:right;
-    margin-right:20px;
+    margin-right:2%;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
-    margin-top:10px;
-}
-
-#titulo{
     
-    width:885px;
-    height:80px;
-    margin-left:20px;
-    position:relative;
-    bottom: -39px;
 }
 
 .Titulos
@@ -46,15 +30,15 @@ and open the template in the editor.
     
 }
 
-#barra-breadcumb{
+.breadcumb{
     background-image:url("#{resource['images:nebula-xneg.png']}");
-    width:886px; 
-    height:40px; 
-    position:relative; 
-    top:32px; 
-    margin-left:20px;
+    width:100%; 
+    height:40px;
+    position:relative;
+    bottom:26px;
     border-radius: 10px 10px 0px 0px;
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
+   
 }
 
 .menu-bread{
@@ -63,37 +47,43 @@ and open the template in the editor.
     text-shadow: 0px 0px 0px !important;
     
 }
-
+#render{
+    width:67%;
+    margin-left: 2%;
+    height:50px;
+    position:relative;
+    bottom:18px;
+    
+    
+    
+    }
 canvas{
 	background-image:url("#{resource['images:nebula-xneg.png']}");
 	/*margin-top: 15% !important;*/
-        width: 885px !important;
-        height: 450px !important; 
+        width: 100% !important;
+        height: 480px !important; 
         position:relative;
-	margin-left: 20px;
-        border-radius: 0px 0px 10px 10px;
+        bottom:27px;
+	border-radius: 0px 0px 10px 10px;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
-        z-index:1;
         
-       }
+    }
        
-       .lista-canvas{
-           color:#9d9d9d;
-       }
        
        
        
 #barraArbol
 {
     background-color: black;
-    width:300px;
-    height:450px;
+    width:26%;
+    position:relative;
+    top:16px;
+    height:462px;
     float:right;
-    margin-right:20px;
-    z-index:1;
+    margin-right:2%;
     border-radius: 10px 10px 10px 10px;
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
-    overflow:scroll;
+    
     
     
 }
@@ -106,6 +96,13 @@ canvas{
     
      
 }
+
+.tituloDepa{
+    color:whitesmoke; 
+    position:relative; 
+    bottom:502px;
+}
+
 
 @keyframes mapfront_spin {
   0% {
