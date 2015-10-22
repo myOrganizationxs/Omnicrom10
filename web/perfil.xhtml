@@ -92,7 +92,19 @@
                 <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink"/>
             </p:menuButton>        
         </h:form>
-        
+        <h:form>
+                                <h:panelGrid columns="1" cellpadding="5" >
+                                    <p:commandButton value="Mision" type="button" class="menuboton" onclick="PF('dlg1').show();" />
+                                    <p:commandButton value="Vision" type="button" class="menuboton" onclick="PF('dlg2').show();" />
+                                    <p:commandButton value="Objetivos" type="button" class="menuboton" onclick="PF('dlg3').show();" />
+                                </h:panelGrid>
+                    </h:form>
+                    <h:form>
+                                    <p:dialog  header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
+                                        <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
+                                        <p:commandButton value="Objetivos" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                    </p:dialog>
+                    </h:form>
         
     </h:body>
 </html>

@@ -11,6 +11,7 @@
             
 
             <ui:define name="content">
+                <h:form>
                 <h2>Ingresar usuario y contraseña</h2>
             
            
@@ -21,14 +22,14 @@
                 <p:outputLabel value="Contraseña" for="txtContraseña"/>
                 <p:password id="txtContraseña" size="50" value="#{MbSession.contrasenia}" />
                 <h:panelGroup></h:panelGroup>
-                <p:commandButton value="Iniciar sesion" action="#{MbSession.login()}" update="formSession">
+                <p:commandButton value="Iniciar sesion" action="#{MbSession.login()}" update="">
                 </p:commandButton>
             </h:panelGrid>
             <span>
             <p:outputLabel value="sesion uniciada por:"/>
             <p:outputLabel id="labelsession" value="#{MbSession.usuario}"/><p></p>
             </span>
-           
+                </h:form>
             </ui:define>
 
         </ui:composition>

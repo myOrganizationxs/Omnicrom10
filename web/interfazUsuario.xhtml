@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
-    <body style="overflow-y:hidden;">
+    <body>
 
         <ui:composition template="./masterPage.xhtml">
 
@@ -23,13 +23,27 @@
                 <input type="hidden" id="NodosHijos" value="#{MbTree.nodoCentro}"></input>
                 </div>
                 <h:form>
-                    <div id="barraArbol">
-                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true">
-                            <p:treeNode>
-                                <h:outputText style="color:whitesmoke;" value="#{node}" />
-                            </p:treeNode>
-                        </p:tree>
+                    <div style="margin-left:2%; position:relative; top:80px;">
+                        <h:form>
+                            <h:panelGrid columns="1" cellpadding="5" >
+                                <p:commandButton value="Mision" type="button" class="menuboton" onclick="PF('dlg1').show();" />
+                                <p:commandButton value="Vision" type="button" class="menuboton" onclick="PF('dlg2').show();" />
+                                <p:commandButton value="Objetivos" type="button" class="menuboton" onclick="PF('dlg3').show();" />
+                            </h:panelGrid>
+                            <p:dialog style="z-index:1;" header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
+                                <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
+                                <p:commandButton value="Objetivos" action="#{CambioPagina.cambioPaginaxs()}" />
+                            </p:dialog>
+                        </h:form>
                     </div>
+                <div id="barraArbol">
+                    <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true">
+                        <p:treeNode>
+                            <h:outputText style="color:whitesmoke;" value="#{node}" />
+                        </p:treeNode>
+                    </p:tree>
+                    
+                </div>
                 
                     <div id="render" >
                         <p:breadCrumb class="breadcumb">
@@ -48,23 +62,7 @@
                         <h:outputScript library="js" name="CanvasAnimcion.js"/>
                         <h:outputScript library="js" name="info.js"/>  
                         <h3 class="tituloDepa" align="center"><h:outputText  value="Departamento X" ></h:outputText></h3>
-                        <div  style="position:relative; bottom:500px; height:250px; width: 90px; margin-left:25px; background:yellow;">
-                            <h:form>    
-                                <h:panelGrid columns="1" cellpadding="5" >
-                                    <p:commandButton value="Mision" type="button" style="z-index:2; background:none; border:none; width:90px; text-shadow:none; font-weight: normal; color:#9d9d9d;" onclick="PF('dlg1').show();" />
-                                    <p:commandButton value="Vision" type="button" style="background:none; border:none; width:90px; text-shadow:none; font-weight: normal; color:#9d9d9d;" onclick="PF('dlg2').show();" />
-                                    <p:commandButton value="Objetivos" type="button" style="background:none; border:none; width:90px; text-shadow:none; font-weight: normal; color:#9d9d9d;" onclick="PF('dlg3').show();" />
-                                </h:panelGrid>
-                            </h:form>
-                        </div>
                         
-                        <h:form>
-                            <p:dialog  header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
-                                <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
-                                <p:commandButton value="Objetivos" actionListener="#{MbCambiarPagina.irMensajes}" />
-                             </p:dialog>
-                        </h:form>
-                       
                     </div>
                 </h:form>
                         
