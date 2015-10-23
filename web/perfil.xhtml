@@ -1,14 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <p:outputLabel value="#{MbSession.usuario}"/>
-        <h2>Mi perfil</h2>      
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="content">
+                
+        <h2 align="center">Mi perfil</h2>      
         <h:form id="frmCuenta">
             <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
             <p:dataTable id="tablaCuenta" var="item" value="#{MbRequest.cuentas}" paginator="false" rows="1"> 
@@ -24,88 +28,51 @@
                 <p:column headerText="Usuario">
                     <h:outputText value="#{item[0].usuario}"/>
                 </p:column>
-                <p:column headerText="Tipo Cuenta">
-                    <h:outputText value="#{item[0].tipoCuenta}"/>
-                </p:column>
-                <p:column headerText="Estado">
-                    <h:outputText value="#{item[0].estado}"/>
-                </p:column>
-                <p:column headerText="Modo">
-                    <h:outputText value="#{item[0].modo}"/>
-                </p:column>
-                <p:column headerText="Modo">
+                
+                <p:column headerText="Nombre">
                     <h:outputText value="#{item[1].nombreUsu}"/>
                 </p:column>
-                <p:column headerText="Modo">
+                <p:column headerText="Apellido Paterno">
                     <h:outputText value="#{item[1].apellidoPaterno}"/>
                 </p:column>
-                <p:column headerText="Modo">
+                <p:column headerText="Apellido Materno">
                     <h:outputText value="#{item[1].apellidoMaterno}"/>
                 </p:column>
-                <p:column headerText="Modo">
+                <p:column headerText="Correo">
                     <h:outputText value="#{item[1].correoElectro}"/>
                 </p:column>
-                <p:column headerText="Modo">
+                <p:column headerText="Telefono">
                     <h:outputText value="#{item[1].telefono}"/>
                 </p:column>
-                <p:column headerText="Modo">
-                    <h:outputText value="#{item[1].correoElectro}"/>
-                </p:column>
-                
+                                
             </p:dataTable>                  
         </h:form>
-        
-        <h:form id="frmCuentas">
-            <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
-            <p:dataTable id="tablaCuenta" var="cuen" value="#{MbRequest.byIdcuentas}" paginator="false" rows="1">                                            
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{cuen.idCuenta}"/>
-                </p:column>
-                <p:column headerText="Cuenta">
-                    <h:outputText value="#{cuen.fechaCreacion}"/>
-                </p:column>  
-                <p:column headerText="Cuenta">
-                    <h:outputText value="#{cuen.tipoCuenta}"/>
-                </p:column>  
-            </p:dataTable>                  
-        </h:form>
-        
+        <br></br>
         <h:form>
-            <h:commandButton value="Boton" action="#{CambioPagina.cambioPaginaxs()}" />
-        </h:form>
-        
-        <h:form>
-            <h:panelGrid columns="1" cellpadding="5">
-                <p:commandButton value="Effects" type="button" onclick="PF('dig7').show();" /> 
+            <h:panelGrid columns="1" cellpadding="5" >
+                <p:commandButton class="btn-primary" value="Modificar" type="button" onclick="PF('dlg6').show();" />
             </h:panelGrid>
-        </h:form>
-       
-        <h:form id="dialogform">
-            <p:dialog id="dialogo1" widgetVar="dig7" onHide="true">
-                <p:outputLabel value="que pedo"></p:outputLabel>
-                <h:commandButton value="Boton dialogo" action="#{CambioPagina.cambioPaginaxs()}" />
+            <p:dialog style="z-index:1;" header="Modificar" modal="true" widgetVar="dlg6" showEffect="clip" hideEffect="clip">
+                <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Nombre:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Apellido Paterno:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Apellido Materno:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Correo electronico:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Telefono:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Usuario:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="Contraseña:"></h:outputText><h:inputText></h:inputText>
+                    <h:outputText value="ingresa de nuevo tu contraseña"></h:outputText><h:inputText></h:inputText>
+                </h:panelGrid>
+                    <p:commandButton class="btn-group-vertical" value="Guardar" />
+                </h:form>
             </p:dialog>
         </h:form>
         
-        <h:form id="menu">
-            <p:menuButton value="Mensajes">
-                <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="ui-icon-extlink"/>
-            </p:menuButton>        
-        </h:form>
-        <h:form>
-                                <h:panelGrid columns="1" cellpadding="5" >
-                                    <p:commandButton value="Mision" type="button" class="menuboton" onclick="PF('dlg1').show();" />
-                                    <p:commandButton value="Vision" type="button" class="menuboton" onclick="PF('dlg2').show();" />
-                                    <p:commandButton value="Objetivos" type="button" class="menuboton" onclick="PF('dlg3').show();" />
-                                </h:panelGrid>
-                    </h:form>
-                    <h:form>
-                                    <p:dialog  header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
-                                        <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
-                                        <p:commandButton value="Objetivos" action="#{MbEnviarMensaje.bandejaSalida()}" />
-                                    </p:dialog>
-                    </h:form>
         
-    </h:body>
-</html>
+            </ui:define>
 
+        </ui:composition>
+
+    </body>
+</html>

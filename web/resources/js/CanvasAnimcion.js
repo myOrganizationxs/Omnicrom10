@@ -176,23 +176,12 @@
        }
        
         */
-        function animacion2(){
-            domEvents.addEventListener(central, 'click', function(event){
-		central.position.x = 0;
-		central.position.y = 0;
-		central.position.z = 0;
-		central.scale.x = 13;
-		central.scale.y = 13;
-		central.scale.z = 13;
-		PF('dlg5').show();
-		// window.location = 'https://www.facebook.com';
-	}, false)
-	// fin de DOM para cental
+        // fin de DOM para cental
         
         
         
         
-	}
+	
             
         
         

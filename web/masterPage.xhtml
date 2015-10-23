@@ -34,9 +34,10 @@
                 <p:commandButton   class="navbar-brand glyphicon glyphicon-eject" style="float:right;  background:none; border:none;" value="" action="#{MbSession.cerrarSesion()}"></p:commandButton>                 
                 <p:link outcome="/perfil" class="navbar-brand glyphicon glyphicon-user" style="float:right; margin-right: 20px;"></p:link>            
                 <a class="navbar-brand" style="float:right; margin-right: 20px;"><span class="glyphicon glyphicon-comment" href="#BandejadeEntrada.xhtml"></span></a>
-                <p:menuButton  style="float:right; margin-right: 20px;" value="Mensajes">
-                    <p:menuitem value="peticion" action="#{MbEnviarMensaje.bandejaSalida()}"/>
-                    <p:menuitem value="peticion" action="#{MbEnviarMensaje.bandejaEntrada()}"/>
+                
+                <p:menuButton style="float:right; background:black; margin-right: 20px;" value="Mensajes">
+                    <p:menuitem value="Mensajes Enviados" action="#{MbEnviarMensaje.bandejaSalida()}"/>
+                    <p:menuitem value="Mensajes Recibidos" action="#{MbEnviarMensaje.bandejaEntrada()}"/>
                 </p:menuButton>
                 
             </div>

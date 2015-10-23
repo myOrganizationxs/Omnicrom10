@@ -30,44 +30,84 @@
                                 <p:commandButton value="Vision" type="button" class="menuboton" onclick="PF('dlg2').show();" />
                                 <p:commandButton value="Objetivos" type="button" class="menuboton" onclick="PF('dlg3').show();" />
                             </h:panelGrid>
-                            <p:dialog style="z-index:1;" header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535" >
+                            <p:dialog style="z-index:1;" header="Mision" widgetVar="dlg1" showEffect="clip" hideEffect="clip" width="860" height="75" position="24,535" >
                                 <h:outputText  value="Transformar las organizaciones de complicadas y disfuncionales a complejas, fluidas y funcionales" />                        
-                                <p:commandButton value="Objetivos" action="#{CambioPagina.cambioPaginaxs()}" />
+                            </p:dialog>
+                            <p:dialog header="Vision" widgetVar="dlg2" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535">
+                                <h:outputText value="Mision de la empresa" />
+                            </p:dialog>
+                            <p:dialog header="Objetivos" widgetVar="dlg3" showEffect="clip" hideEffect="clip" width="250" height="75" position="20,535">
+                                <h:panelGrid columns="1">
+                                    <p:commandButton value="Objetivos Cualitativos" type="button" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                    <p:commandButton value="Objetivos Cuantitativos" type="button" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                </h:panelGrid>
                             </p:dialog>
                         </h:form>
-                    </div>
+                        </div>
+                        <p:dialog style="overflow:hidden; background:graytext; opacity:.8; border-radius: 10px; " modal="true" header="Datos" widgetVar="dlg5" showEffect="clip" hideEffect="clip" width="885" height="440" position="20,170">
+                            <div class="row" style="overflow:hidden;">
+                                <div class="col-sm-6 col-md-3">
+                                    <a style="background:background;  float:left; border-radius: 50px; height:300px; width:400px;" href="#" class="thumbnail">
+                                    <img data-src="..." alt="..."/>
+                                    </a>
+                                </div>
+                                ...
+                            </div>
+                            <div style="float:right; position:relative; top:-307px;margin-right: 100px;">
+                                <h:form>
+                                    <h:panelGrid  columns="1" cellpadding="5" >
+                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Nombre:"></h:outputText>
+                                        <p></p>
+                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Puesto:"></h:outputText>
+                                        <p></p>
+                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Telefono:"></h:outputText>
+                                        <p></p>
+                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Correo:"></h:outputText>
+                                        <p></p>
+                                        <p></p>
+                                        <p></p>
+                                        <p></p>
+                                        <p:commandButton style=" margin-top: 30px; width:300px;" value="Proceso Central (PX)" type="button"  action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                        <p></p>
+                                        <p></p>
+                                        <p:commandButton style="width:300px;" value="Perfil Cerebral" type="button"  />
+                                        <p></p>
+                                        <p></p>
+                                        <p:commandButton style="width:300px;" value="Estructura Funcional" type="button" />
+                                    </h:panelGrid>                          
+                                </h:form>
+                                <p:dialog header="Nombre" widgetVar="dlg4" showEffect="clip" hideEffect="clip" width="300" height="10" position="330,598" style="opacity:0.7;"></p:dialog>
+                            </div>      
+                        </p:dialog>  
+                    
                 <div id="barraArbol">
                     <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true">
                         <p:treeNode>
                             <h:outputText style="color:whitesmoke;" value="#{node}" />
                         </p:treeNode>
                     </p:tree>
-                    
                 </div>
-                
-                    <div id="render" >
-                        <p:breadCrumb class="breadcumb">
-                            <p:menuitem value="Direccion General" class="navbar-brand" url="#"/>
-                            <p:menuitem value="Recursos Financieros" class="navbar-header-inverse menu-bread" url="#" />
-                        </p:breadCrumb>
+                <div id="render" >
+                    <p:breadCrumb class="breadcumb">
+                        <p:menuitem value="Direccion General" class="navbar-brand" url="#"/>
+                        <p:menuitem value="Recursos Financieros" class="navbar-header-inverse menu-bread" url="#" />
+                    </p:breadCrumb>
                         
-                        <h:outputScript library="js" name="Three.js"/>
-                        <h:outputScript library="js" name="Detector.js"/>
-                        <h:outputScript library="js" name="Stats.js"/>
-                        <h:outputScript library="js" name="OrbitControls.js"/>
-                        <h:outputScript library="js" name="THREEx.KeyboardState.js"/>
-                        <h:outputScript library="js" name="THREEx.FullScreen.js"/>
-                        <h:outputScript library="js" name="THREEx.WindowResize.js"/>
-                        <h:outputScript library="js" name="threex.domevents.js"/>
-                        <h:outputScript library="js" name="CanvasAnimcion.js"/>
-                        <h:outputScript library="js" name="info.js"/>  
-                        <h3 class="tituloDepa" align="center"><h:outputText  value="Departamento X" ></h:outputText></h3>
+                    <h:outputScript library="js" name="Three.js"/>
+                    <h:outputScript library="js" name="Detector.js"/>
+                    <h:outputScript library="js" name="Stats.js"/>
+                    <h:outputScript library="js" name="OrbitControls.js"/>
+                    <h:outputScript library="js" name="THREEx.KeyboardState.js"/>
+                    <h:outputScript library="js" name="THREEx.FullScreen.js"/>
+                    <h:outputScript library="js" name="THREEx.WindowResize.js"/>
+                    <h:outputScript library="js" name="threex.domevents.js"/>
+                    <h:outputScript library="js" name="CanvasAnimcion.js"/>
+                    <h:outputScript library="js" name="info.js"/>  
+                    <h3 class="tituloDepa" align="center"><h:outputText  value="Departamento X" ></h:outputText></h3>
                         
                     </div>
                 </h:form>
-                        
-                
-                
+                    
             </ui:define>
 
         </ui:composition>
