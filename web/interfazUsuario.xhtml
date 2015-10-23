@@ -22,7 +22,7 @@
                 <h2 align="center"><h:outputText  id="IdOrganizacion" class="Titulos" value="#{MbViewOrganizacion.nombreOrganizacion}"/></h2>
                 <input type="hidden" id="NodosHijos" value="#{MbTree.nodoCentro}"></input>
                 </div>
-                <h:form>
+                
                     <div style="margin-left:2%; position:relative; top:80px;">
                         <h:form>
                             <h:panelGrid columns="1" cellpadding="5" >
@@ -81,12 +81,16 @@
                         </p:dialog>  
                     
                 <div id="barraArbol">
-                    <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true">
-                        <p:treeNode>
-                            <h:outputText style="color:whitesmoke;" value="#{node}" />
-                        </p:treeNode>
-                    </p:tree>
+                    <h:form id="formArbol">           
+                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true" selection="#{MbTree.singleSelectedTreeNode}" selectionMode="single">
+                             <p:treeNode>
+                                 <h:outputText style="color:whitesmoke;" value="#{node}"  />
+                             </p:treeNode>
+                            <p:ajax event="select" listener="#{MbTree.onNodeSelect}" onstart="" update=":formAnimacion"></p:ajax>
+                        </p:tree>
+                     </h:form>
                 </div>
+                <h:form id="formAnimacion">
                 <div id="render" >
                     <p:breadCrumb class="breadcumb">
                         <p:menuitem value="Direccion General" class="navbar-brand" url="#"/>

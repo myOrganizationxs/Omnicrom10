@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 /**
@@ -47,7 +48,11 @@ public class MbTree implements Serializable
     private int idNodo;
     private int NumeroDeNodos;
     private List<Object[]> ListaNodosHijos;
- 
+    private TreeNode singleSelectedTreeNode;
+    private String[][] matrizArbol;
+    
+    private int suma;
+ //dasdasd
     public MbTree() throws Exception 
     { 
         this.session=null;
@@ -60,11 +65,11 @@ public class MbTree implements Serializable
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);   
         liste=daoNodo.getByOrganizacion(session,(Integer) sessionUsuario.getAttribute("idorganizacion"),0);
         
+        NumeroDeNodos=(Integer) sessionUsuario.getAttribute("idNodo");
+        
         for(Object[] itr:liste)
         {
-            DaoOrbita daoOrbita= new DaoOrbita();
-            String nombredep= daoOrbita.getByIdNodoOrg(session,(int) itr[0]);
-            donanim=new DefaultTreeNode(nombredep+"("+itr[1]+")", root);
+            donanim=new DefaultTreeNode(itr[1], root);
             idNodo=(int) itr[0];            
         }
         recursive(liste,idNodo,donanim);  
@@ -75,23 +80,15 @@ public class MbTree implements Serializable
         lista=daoNodo.getByOrganizacion(session,(Integer) sessionUsuario.getAttribute("idorganizacion"),id);
         for(Object[] n:lista)
         {
-            DaoOrbita daoOrbita= new DaoOrbita();
-            String nombredep= daoOrbita.getByIdNodoOrg(session,(int) n[0]);
-            if(nombredep!=null)
-            {
-                TreeNode childNode=new DefaultTreeNode(nombredep+"("+n[1]+")", node);
-                idNodo=(int) n[0];    
-                recursive(lista,idNodo,childNode);
-            }
-            else
-            {
+
                 TreeNode childNode=new DefaultTreeNode(n[1], node);
                 idNodo=(int) n[0];    
                 recursive(lista,idNodo,childNode);
-            }
+
         }
+        
     }
-    
+    //inicia la forma dinamica de hacer el arbol
     public List getNodoCentro()
     {
         session=null;
@@ -102,10 +99,10 @@ public class MbTree implements Serializable
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaction=this.session.beginTransaction();          
             HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            NumeroDeNodos=(Integer) sessionUsuario.getAttribute("idNodo");
             ListaNodosHijos=daoNodo.getByIdNodo(session, NumeroDeNodos,(Integer) sessionUsuario.getAttribute("idorganizacion"));
             //Gson gson= new Gson();
-            //gson.toJson(ListaNodosHijos);       
+            //gson.toJson(ListaNodosHijos);  
+            JOptionPane.showMessageDialog(null, "numero "+ListaNodosHijos+" seleccionado");
             return ListaNodosHijos;
         }
         catch(Exception ex)
@@ -117,23 +114,21 @@ public class MbTree implements Serializable
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
             return null;
         }      
-    }
-    public Integer getNodoHijo()
-    {
-        try
+        finally
         {
-            return NumeroDeNodos;
-        }
-        catch(Exception ex)
-        {
-            if(this.transaction!=null)
+            if(this.session!=null)
             {
-                this.transaction.rollback();
-            }           
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
-            return null;
-        }           
+                this.session.close();
+            }
+        }
     }
+    
+    public void onNodeSelect(NodeSelectEvent event){
+        JOptionPane.showMessageDialog(null, "Node Data ::"+singleSelectedTreeNode+" :: Selected");
+        
+        //buscar por nombre de nodo
+    }
+    
     public TreeNode getRoot() {
         return root;
     }
@@ -168,6 +163,30 @@ public class MbTree implements Serializable
 
     public void setListaNodosHijos(List<Object[]> ListaNodosHijos) {
         this.ListaNodosHijos = ListaNodosHijos;
+    }
+
+    public TreeNode getSingleSelectedTreeNode() {
+        return singleSelectedTreeNode;
+    }
+
+    public void setSingleSelectedTreeNode(TreeNode singleSelectedTreeNode) {
+        this.singleSelectedTreeNode = singleSelectedTreeNode;
+    }
+
+    public int getSuma() {
+        return suma;
+    }
+
+    public void setSuma(int suma) {
+        this.suma = suma;
+    }
+
+    public String[][] getMatrizArbol() {
+        return matrizArbol;
+    }
+
+    public void setMatrizArbol(String[][] matrizArbol) {
+        this.matrizArbol = matrizArbol;
     }
     
 }
