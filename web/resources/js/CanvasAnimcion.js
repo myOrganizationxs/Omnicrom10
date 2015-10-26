@@ -7,16 +7,36 @@
 /******************************* variables *******************/
 			//Preparamos el render     
         //obtener datos para crear los nodos
-        var NodosHijos= document.getElementById("NodosHijos").value;
+        var resultado = new Array();
+        resultado[0] = new Array();
+        resultado[0][0]="nombre " + 0;
+        resultado[0][1]="id " + 0;
+          resultado[1] = new Array();
+        resultado[1][0]="nombre " + 1;
+        resultado[1][1]="id " + 1;
+          resultado[2] = new Array();
+        resultado[2][0]="nombre " + 2;
+        resultado[2][1]="id " + 2;alert(resultado.length);
+        var NodosHijos= resultado.length;//document.getElementById("NodosHijos").value;
         var NodosHijos1= JSON.parse(NodosHijos);
         var nodo;
         var nEsferas=0;                
-        for (var i=1; i<NodosHijos1.length; i++) 
-        {   
+        var arregloDeSuma;	
+        var controls;
+        var central;
+        var central_geometry;
+        var central_material;
+        var flag;
+        var distanciaSuma;
+        var distanciaEntrenodos;
+        var flags, sphere, sphereGeometry, sphereMaterial;
+        function creaEsferas(){alert(NodosHijos1);
+            for (var i=1; i<NodosHijos; i++) 
+                  {   
             nodo =NodosHijos1[0];
-            nEsferas=nEsferas+1;
-        }			
-        
+            nEsferas=nEsferas+1; 
+             }alert("crea esferas" + nEsferas); 
+        } 
         var Render=new THREE.WebGLRenderer();		
         ////El escenario
 	var Escenario=new THREE.Scene();
@@ -28,19 +48,19 @@
 	var t6=31;
         var anima;
         
-	var flag = true;
-        var flags = new Array(nEsferas);
-	var sphere=new Array(nEsferas);
-        var sphereGeometry= new Array(nEsferas);
-        var sphereMaterial= new Array(nEsferas);
+	 flag = true;
+         flags = new Array(nEsferas);
+	 sphere=new Array(nEsferas);
+         sphereGeometry= new Array(nEsferas);
+        sphereMaterial= new Array(nEsferas);
         
         //distancia entre nodos;
-        var distanciaEntrenodos=64/(nEsferas+1);
-        var distanciaSuma=0;
-        var arregloDeSuma=new Array(nEsferas);
+         distanciaEntrenodos=64/(nEsferas+1);
+         distanciaSuma=0;
+        arregloDeSuma=new Array(nEsferas);
         var domEventss = new Array(nEsferas);
         
-	var controls;
+	
 	var Ancho=window.innerWidth-50;
 	var Alto=window.innerHeight-50;
 			
@@ -95,17 +115,20 @@
 		line.rotation.set( Math.PI/2, 0, 0 )
 	Escenario.add( line );
         
-        var central_geometry = new THREE.SphereGeometry( 2, 32, 32 );
-	var central_material = new THREE.MeshPhongMaterial( { color: 0x87CEEB  } );
-	var central = new THREE.Mesh( central_geometry, central_material );
+         central_geometry = new THREE.SphereGeometry( 2, 32, 32 );
+	 central_material = new THREE.MeshPhongMaterial( { color: 0x87CEEB  } );
+	 central = new THREE.Mesh( central_geometry, central_material );
 	Escenario.add( central );
-
-       for (var i=0; i<=nEsferas; i++) 
+         
+    }
+    function dibujaEsferas(){console.log("en dibuja nesferas" + nEsferas);
+     for (var i=0; i<=nEsferas; i++) 
         {
             sphereGeometry[i] = new THREE.SphereGeometry( 2, 32, 32 ); 
             sphereMaterial[i] = new THREE.MeshPhongMaterial( { color: 0x87CEEB } );
             sphere[i] = new THREE.Mesh(sphereGeometry[i], sphereMaterial[i]);
             sphere[i].position.x = 30;
+            sphere[i].name="Esfera " + i;
             Escenario.add(sphere[i]);
             arregloDeSuma[i]=distanciaSuma;
             distanciaSuma=distanciaSuma+distanciaEntrenodos;
@@ -128,7 +151,8 @@
                 }, false)
                 
 	domEventss[i].addEventListener(sphere[i], 'click', function(event){
-                    alert(i);
+                    console.log(this["id"]);
+            alert(this["id"]);
                 }, false)    
         }
         var domEvents= new THREEx.DomEvents(Camara, Render.domElement);
@@ -156,10 +180,11 @@
 	}, false)
 	// fin de DOM para cental
         
+    }     
         
         
-        
-	}
+	
+      
         /*
         var LA= Camara.scale.z+=0.1; 
        
@@ -187,7 +212,7 @@
         
         var tiempo=0;
         function animacion1(){
-            console.log(tiempo);
+           
             var delta = Math.random() * (0.06 - 0.02) + 0.02;
     
             if(tiempo<200){
@@ -197,38 +222,33 @@
             tiempo++;
             
         }
-        
+        var cont=0;
+        function hola(){
+            alert("hola " + cont);
+            cont++;
+        }
         
 	function animacion(){
             
             
             if (flag==true) {
-		
+                //nEsferas = NodosHijos;
+             
                 for (var i=0; i<=nEsferas; i++) 
+                
                 {
                     sphere[i].position.x = Math.sin(arregloDeSuma[i]*0.1)*30;
                     sphere[i].position.z = Math.cos(arregloDeSuma[i]*0.1)*20;
                     arregloDeSuma[i]-=Math.PI/180*2;
+                    console.log(sphere[i]);
                 }
     };
-        /*
-        tiempo=0.001;
-        distancia=100;
-        recorrido=distancia*tiempo;
         
-            if(keyboard.pressed("w")){
-            Camara.scale.z+=recorrido;
-        }
-        
-            if(keyboard.pressed("s")){
-            Camara.scale.z-=recorrido;
-        }
-          */  
 	requestAnimationFrame(animacion);
         render_modelo();
         animacion1();
-        animacion2();
-        
+            
+         
        
         
         
@@ -242,6 +262,22 @@
 	Render.render(Escenario,Camara);
 	}
 	/**************************llamado a las funciones ******************/
-			
+$(document).ready(function(){	
+            primero();
+        });
+        
+        function primero(){
+            
 	inicio();
-	animacion();
+                creaEsferas();
+        dibujaEsferas();
+        animacion();
+        }
+        
+        function recarga(){
+            if(sphere.length>0){
+                 creaEsferas();
+        dibujaEsferas();
+        animacion();
+            }
+        }

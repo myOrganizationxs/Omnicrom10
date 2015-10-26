@@ -23,8 +23,8 @@
                 <input type="hidden" id="NodosHijos" value="#{MbTree.nodoCentro}"></input>
                 </div>
                 
-                    <div style="margin-left:2%; position:relative; top:80px;">
-                        <h:form>
+                    <div  id="divMVO" style="margin-left:2%; position:relative; top:80px;">
+                        <h:form id="formMVO">
                             <h:panelGrid columns="1" cellpadding="5" >
                                 <p:commandButton value="Mision" type="button" class="menuboton" onclick="PF('dlg1').show();" />
                                 <p:commandButton value="Vision" type="button" class="menuboton" onclick="PF('dlg2').show();" />
@@ -38,8 +38,8 @@
                             </p:dialog>
                             <p:dialog header="Objetivos" widgetVar="dlg3" showEffect="clip" hideEffect="clip" width="250" height="75" position="20,535">
                                 <h:panelGrid columns="1">
-                                    <p:commandButton value="Objetivos Cualitativos" type="button" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
-                                    <p:commandButton value="Objetivos Cuantitativos" type="button" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                    <p:commandButton value="Objetivos Cualitativos" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                    <p:commandButton value="Objetivos Cuantitativos" class="btn-block" action="#{MbObjetivos.enviarCuantitavos()}" />
                                 </h:panelGrid>
                             </p:dialog>
                         </h:form>
@@ -82,7 +82,7 @@
                     
                 <div id="barraArbol">
                     <h:form id="formArbol">           
-                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true" selection="#{MbTree.singleSelectedTreeNode}" selectionMode="single">
+                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="false" selection="#{MbTree.singleSelectedTreeNode}" selectionMode="single">
                              <p:treeNode>
                                  <h:outputText style="color:whitesmoke;" value="#{node}"  />
                              </p:treeNode>
@@ -90,14 +90,9 @@
                         </p:tree>
                      </h:form>
                 </div>
-                <h:form id="formAnimacion">
-                <div id="render" >
-                    <p:breadCrumb class="breadcumb">
-                        <p:menuitem value="Direccion General" class="navbar-brand" url="#"/>
-                        <p:menuitem value="Recursos Financieros" class="navbar-header-inverse menu-bread" url="#" />
-                    </p:breadCrumb>
-                        
-                    <h:outputScript library="js" name="Three.js"/>
+                   
+                 <div id="render" >
+                     <h:outputScript library="js" name="Three.js"/>
                     <h:outputScript library="js" name="Detector.js"/>
                     <h:outputScript library="js" name="Stats.js"/>
                     <h:outputScript library="js" name="OrbitControls.js"/>
@@ -105,11 +100,29 @@
                     <h:outputScript library="js" name="THREEx.FullScreen.js"/>
                     <h:outputScript library="js" name="THREEx.WindowResize.js"/>
                     <h:outputScript library="js" name="threex.domevents.js"/>
-                    <h:outputScript library="js" name="CanvasAnimcion.js"/>
-                    <h:outputScript library="js" name="info.js"/>  
-                    <h3 class="tituloDepa" align="center"><h:outputText  value="Departamento X" ></h:outputText></h3>
+                 <h:outputScript library="js" name="CanvasAnimcion.js"/>
+                    <p:breadCrumb class="breadcumb">
+                        <p:menuitem value="Direccion General" class="navbar-brand" url="#"/>
+                        <p:menuitem value="Recursos Financieros" class="navbar-header-inverse menu-bread" url="#" />
+                    </p:breadCrumb>
+                     <h3 class="tituloDepa" align="center"><h:outputText style="color:red;" value="" ></h:outputText></h3>   
+                    
+                    
+                         
+                     
+                     
+                    
                         
                     </div>
+                <h:form id="formAnimacion">
+                    
+                    <!--<h3 class="tituloDepa" align="center"><h:outputText style="color:red;" value="" ></h:outputText></h3>-->
+                 <script>hola();
+             
+            recarga();
+               
+                 </script>
+                 
                 </h:form>
                     
             </ui:define>

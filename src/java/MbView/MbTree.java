@@ -50,8 +50,8 @@ public class MbTree implements Serializable
     private List<Object[]> ListaNodosHijos;
     private TreeNode singleSelectedTreeNode;
     private String[][] matrizArbol;
-    
-    private int suma;
+    private String Dep="Departamento X";
+    private int suma=123;
  //dasdasd
     public MbTree() throws Exception 
     { 
@@ -102,7 +102,7 @@ public class MbTree implements Serializable
             ListaNodosHijos=daoNodo.getByIdNodo(session, NumeroDeNodos,(Integer) sessionUsuario.getAttribute("idorganizacion"));
             //Gson gson= new Gson();
             //gson.toJson(ListaNodosHijos);  
-            JOptionPane.showMessageDialog(null, "numero "+ListaNodosHijos+" seleccionado");
+            //.showMessageDialog(null, "numero "+ListaNodosHijos+" seleccionado");
             return ListaNodosHijos;
         }
         catch(Exception ex)
@@ -125,7 +125,7 @@ public class MbTree implements Serializable
     
     public void onNodeSelect(NodeSelectEvent event){
         JOptionPane.showMessageDialog(null, "Node Data ::"+singleSelectedTreeNode+" :: Selected");
-        
+        suma++;
         //buscar por nombre de nodo
     }
     
@@ -187,6 +187,14 @@ public class MbTree implements Serializable
 
     public void setMatrizArbol(String[][] matrizArbol) {
         this.matrizArbol = matrizArbol;
+    }
+
+    public String getDep() {
+        return Dep;
+    }
+
+    public void setDep(String Dep) {
+        this.Dep = Dep;
     }
     
 }

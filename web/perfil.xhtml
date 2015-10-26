@@ -68,7 +68,21 @@
                 </h:form>
             </p:dialog>
         </h:form>
+        <div id="barraArbol">
+                    <h:form id="formArbol">           
+                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true" selection="#{MbTree.singleSelectedTreeNode}" selectionMode="single">
+                             <p:treeNode>
+                                 <h:outputText style="color:whitesmoke;" value="#{node}"  />
+                             </p:treeNode>
+                            <p:ajax event="select" listener="#{MbTree.onNodeSelect}" onstart="" update=":formAnimacion"></p:ajax>
+                        </p:tree>
+                     </h:form>
+                </div>
         
+        <h:form id="formAnimacion">
+            
+            <h:outputText style="color:red;" value="#{MbTree.suma}" />
+        </h:form>
         
             </ui:define>
 
