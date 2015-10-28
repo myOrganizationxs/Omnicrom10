@@ -6,10 +6,12 @@
 package prueba.ejercicio;
 
 import Pojo.Cuenta;
+import Pojo.Mensajes;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,6 +26,7 @@ public class ejercicio
 {
     //from Cuenta c inner join c.usuarios u inner join u.nodo n inner join n.mensajeses where IdCuenta=0
     private Session sesion;
+    private Mensajes mensajes;
     
     private void inciaOperacion()
     {
@@ -136,6 +139,20 @@ public class ejercicio
         terminaOperacion();
     }
     
+    public void añadirMensaje()
+    {
+        try{
+            inciaOperacion();
+            mensajes = new Mensajes(null, Integer.SIZE, Integer.SIZE, null, null, null, null, null, Integer.MIN_VALUE, null, Integer.MIN_VALUE);
+            sesion.save(this.mensajes);
+            JOptionPane.showMessageDialog(null,"Mensaje guardado");
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error " + e);
+        }
+    }
+    
     public static void main(String args[])
     {
         ejercicio eje = new ejercicio();
@@ -143,6 +160,16 @@ public class ejercicio
         //eje.obtenNombresYPasswords();
         //eje.obtenNombresYPasswordsComoMapa();
         //eje.getUsuariosConComprasInactivas("123456");
-        eje.obtenNombresYPasswords();
+        //eje.obtenNombresYPasswords();
+        eje.añadirMensaje();
     }
+
+    public Mensajes getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(Mensajes mensajes) {
+        this.mensajes = mensajes;
+    }
+    
 }

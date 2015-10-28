@@ -86,7 +86,7 @@
                              <p:treeNode>
                                  <h:outputText style="color:whitesmoke;" value="#{node}"  />
                              </p:treeNode>
-                            <p:ajax event="select" listener="#{MbTree.onNodeSelect}" onstart="" update=":formAnimacion"></p:ajax>
+                            <p:ajax event="select" listener="#{MbTree.onNodeSelect}" onstart="RemoverSphere()" update=":formAnimacion"></p:ajax>
                         </p:tree>
                      </h:form>
                 </div>
@@ -118,7 +118,6 @@
                     
                     <!--<h3 class="tituloDepa" align="center"><h:outputText style="color:red;" value="" ></h:outputText></h3>-->
                  <script>hola();
-             
             recarga();
                
                  </script>

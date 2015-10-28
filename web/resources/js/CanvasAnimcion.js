@@ -16,32 +16,29 @@
         resultado[1][1]="id " + 1;
           resultado[2] = new Array();
         resultado[2][0]="nombre " + 2;
-        resultado[2][1]="id " + 2;alert(resultado.length);
-        var NodosHijos= resultado.length;//document.getElementById("NodosHijos").value;
+        resultado[2][1]="id " + 2;//alert(resultado.length);
+        var NodosHijos= document.getElementById("NodosHijos").value;//resultado.length;
         var NodosHijos1= JSON.parse(NodosHijos);
         var nodo;
-        var nEsferas=0;                
-        var arregloDeSuma;	
+        var nEsferas=0;                	
         var controls;
         var central;
         var central_geometry;
         var central_material;
         var flag;
         var distanciaSuma;
-        var distanciaEntrenodos;
         var flags, sphere, sphereGeometry, sphereMaterial;
-        function creaEsferas(){alert(NodosHijos1);
+        function creaEsferas(){//alert(NodosHijos1);
             for (var i=1; i<NodosHijos; i++) 
                   {   
             nodo =NodosHijos1[0];
             nEsferas=nEsferas+1; 
-             }alert("crea esferas" + nEsferas); 
+             }//alert("crea esferas" + nEsferas); 
         } 
         var Render=new THREE.WebGLRenderer();		
         ////El escenario
 	var Escenario=new THREE.Scene();
         var keyboard = new THREEx.KeyboardState();
-	
         
 	// la Figura 
         var t=0;
@@ -54,13 +51,10 @@
          sphereGeometry= new Array(nEsferas);
         sphereMaterial= new Array(nEsferas);
         
-        //distancia entre nodos;
-         distanciaEntrenodos=64/(nEsferas+1);
-         distanciaSuma=0;
-        arregloDeSuma=new Array(nEsferas);
-        var domEventss = new Array(nEsferas);
+        //distancia entre nodos;        
+        var arregloDeSuma=new Array(nEsferas);
+       
         
-	
 	var Ancho=window.innerWidth-50;
 	var Alto=window.innerHeight-50;
 			
@@ -119,24 +113,30 @@
 	 central_material = new THREE.MeshPhongMaterial( { color: 0x87CEEB  } );
 	 central = new THREE.Mesh( central_geometry, central_material );
 	Escenario.add( central );
+        
          
     }
-    function dibujaEsferas(){console.log("en dibuja nesferas" + nEsferas);
-     for (var i=0; i<=nEsferas; i++) 
+    function dibujaEsferas(){//console.log("en dibuja nesferas" + nEsferas);
+                
+        var distanciaEntrenodos=64/(nEsferas+1);
+        var distanciaSuma=0;
+        arregloDeSuma=new Array(nEsferas);
+        var domEventss = new Array(nEsferas);
+
+        for (var i=0; i<=nEsferas; i++) 
         {
             sphereGeometry[i] = new THREE.SphereGeometry( 2, 32, 32 ); 
             sphereMaterial[i] = new THREE.MeshPhongMaterial( { color: 0x87CEEB } );
             sphere[i] = new THREE.Mesh(sphereGeometry[i], sphereMaterial[i]);
             sphere[i].position.x = 30;
             sphere[i].name="Esfera " + i;
-            Escenario.add(sphere[i]);
+            Escenario.add(sphere[i]);            
             arregloDeSuma[i]=distanciaSuma;
             distanciaSuma=distanciaSuma+distanciaEntrenodos;
-            
-        domEventss[i]= new THREEx.DomEvents(Camara, Render.domElement);
-	
-	domEventss[i].addEventListener(sphere[i], 'mouseover', function(event){
-		flags[i] = false;
+            alert(arregloDeSuma[i]+" "+distanciaSuma+" "+distanciaEntrenodos);
+            domEventss[i]= new THREEx.DomEvents(Camara, Render.domElement);	
+       	    domEventss[i].addEventListener(sphere[i], 'mouseover', function(event){
+	    flags[i] = false;
             PF('dlg4').show();                
                     
         }, false)
@@ -151,8 +151,8 @@
                 }, false)
                 
 	domEventss[i].addEventListener(sphere[i], 'click', function(event){
-                    console.log(this["id"]);
-            alert(this["id"]);
+                    //console.log(this["id"]);
+            //alert(this["id"]);
                 }, false)    
         }
         var domEvents= new THREEx.DomEvents(Camara, Render.domElement);
@@ -179,7 +179,6 @@
 		// window.location = 'https://www.facebook.com';
 	}, false)
 	// fin de DOM para cental
-        
     }     
         
         
@@ -224,7 +223,7 @@
         }
         var cont=0;
         function hola(){
-            alert("hola " + cont);
+            //alert("hola " + cont);
             cont++;
         }
         
@@ -233,14 +232,15 @@
             
             if (flag==true) {
                 //nEsferas = NodosHijos;
-             
+                
                 for (var i=0; i<=nEsferas; i++) 
                 
                 {
                     sphere[i].position.x = Math.sin(arregloDeSuma[i]*0.1)*30;
                     sphere[i].position.z = Math.cos(arregloDeSuma[i]*0.1)*20;
+                    console.log(Math.PI/180*2);
                     arregloDeSuma[i]-=Math.PI/180*2;
-                    console.log(sphere[i]);
+                    
                 }
     };
         
@@ -279,5 +279,27 @@ $(document).ready(function(){
                  creaEsferas();
         dibujaEsferas();
         animacion();
+            }
+        }
+        function RemoverSphere()
+        {
+               alert("NUmero de esferas"+nEsferas);
+                for (var i=0; i<=nEsferas; i++) 
+                {
+                    Escenario.remove(sphere[i]);
+                }
+                flag==false;
+        }
+        
+        function removercentro()
+        {
+            Escenario.remove(central);
+        }
+        
+        function alertas()
+        {
+            for (var i=0; i<=nEsferas; i++) 
+            {
+                alert(arregloDeSuma[i]+" "+distanciaSuma+" "+distanciaEntrenodos);
             }
         }
