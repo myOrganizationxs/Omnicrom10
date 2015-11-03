@@ -124,7 +124,7 @@ public class MbTree implements Serializable
     }
     
     public void onNodeSelect(NodeSelectEvent event){
-        JOptionPane.showMessageDialog(null, "Node Data ::"+singleSelectedTreeNode+" :: Selected");
+        //JOptionPane.showMessageDialog(null, "Node Data ::"+singleSelectedTreeNode+" :: Selected");
         suma++;
         //buscar por nombre de nodo
     }

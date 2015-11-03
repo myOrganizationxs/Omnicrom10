@@ -61,12 +61,12 @@ body{
     
     }
 canvas{
-	//background-image:url("#{resource['images:nebula-xneg.png']}");
+	background-image:url("#{resource['images:nebula-xneg.png']}");
 	/*margin-top: 15% !important;*/
         width: 100% !important;
-        height: 480px !important; 
+        height: 450px !important; 
         position:relative;
-        bottom:122px;
+        bottom:141px;
 	border-radius: 0px 0px 10px 10px;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, .5);
         z-index:auto;
@@ -81,7 +81,7 @@ canvas{
     width:26%;
     position:relative;
     bottom:80px;
-    height:462px;
+    height:432px;
     float:right;
     margin-right:2%;
     border-radius: 10px 10px 10px 10px;

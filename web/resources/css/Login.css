@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 body{
-    background-image:url("#{resource['images:tierra1.jpg']}");
+    background-image:url("#{resource['images:portada.jpg']}");
     background-repeat: no-repeat;
 }
 
