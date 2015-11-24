@@ -181,8 +181,17 @@
             Escenario.add(sphere[i]);            
             arregloDeSuma[i]=distanciaSuma;
             distanciaSuma=distanciaSuma+distanciaEntrenodos;
+            ddomEvents[i] = new THREEx.DomEvents(Camara, Render.domElement);
+           /* ddomEvents[i].addEventListener(sphere[i], 'mouseover',
+            function(sphere[i]){
+                alert(this);
+                console.log(this);
+            }, false)*/
+            ddomEvents[i].bind(sphere[i], 'mouseover', function(object3d){ console.log(object3d.target.name) });
         }       	// fin de DOM para cental
     }     
+          
+         
           
         function animacion1(){     
             
@@ -208,8 +217,9 @@
                 {
                     sphere[i].position.x = Math.sin(arregloDeSuma[i]*0.1)*30;
                     sphere[i].position.z = Math.cos(arregloDeSuma[i]*0.1)*20;
-                    console.log(sphere[i]);
+                    //console.log(sphere[i]);
                     arregloDeSuma[i]-=Math.PI/180*2;
+                    //console.log("quiero ver el valor " + arregloDeSuma[i]);
                     //[i];
                 }}
     };
@@ -220,8 +230,8 @@
 	}
         
 	function render_modelo(){
-	controls.update();
-	Render.render(Escenario,Camara);
+                    controls.update();
+                    Render.render(Escenario,Camara);
 	}
 	/**************************llamado a las funciones ******************/
 $(document).ready(function(){	
@@ -247,7 +257,7 @@ $(document).ready(function(){
             {    
             dibujaEsferas();
             }
-            animacion();
+          //  animacion();
             }
         }
         function RemoverSphere()
@@ -266,9 +276,6 @@ $(document).ready(function(){
             tiempo=0;
             tiempozoom:200;
             recargars=1;
-            NodosHijos1.push("12");
-            NodosHijos1.push("122");
-            NodosHijos1.push("3");
             
         }
         
