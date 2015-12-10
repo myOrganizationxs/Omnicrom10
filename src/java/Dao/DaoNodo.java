@@ -58,4 +58,23 @@ public class DaoNodo implements Nodos
         return null;
     }
 
+    @Override
+    public Integer getByIdCuenta(Session session,int IdCuenta) throws Exception {
+       try 
+        {
+            //select object(o) from Nodo as o            
+            String hql="select n.idNodo from Nodo n inner join n.usuarios u inner join u.cuenta c where c.idCuenta =:idCuenta";
+            Query query=session.createQuery(hql); 
+            query.setParameter("idCuenta",IdCuenta);
+            int idNodo =(Integer) query.uniqueResult();
+            //JOptionPane.showMessageDialog(null, "nodo agarrado" + nodo);
+            return idNodo;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
+    }
+
 }

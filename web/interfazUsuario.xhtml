@@ -45,39 +45,9 @@
                         </h:form>
                         </div>
                         <p:dialog style="overflow:hidden; background:graytext; opacity:.8; border-radius: 10px; " modal="true" header="Datos" widgetVar="dlg5" showEffect="clip" hideEffect="clip" width="885" height="440" position="20,170">
-                            <div class="row" style="overflow:hidden;">
-                                <div class="col-sm-6 col-md-3">
-                                    <a style="background:background;  float:left; border-radius: 50px; height:300px; width:400px;" href="#" class="thumbnail">
-                                    <img data-src="..." alt="..."/>
-                                    </a>
-                                </div>
-                                ...
-                            </div>
-                            <div style="float:right; position:relative; top:-307px;margin-right: 100px;">
-                                <h:form>
-                                    <h:panelGrid  columns="1" cellpadding="5" >
-                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Nombre:"></h:outputText>
-                                        <p></p>
-                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Puesto:"></h:outputText>
-                                        <p></p>
-                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Telefono:"></h:outputText>
-                                        <p></p>
-                                        <h:outputText style="color: whitesmoke; font-weight:bold;" value="Correo:"></h:outputText>
-                                        <p></p>
-                                        <p></p>
-                                        <p></p>
-                                        <p></p>
-                                        <p:commandButton style=" margin-top: 30px; width:300px;" value="Proceso Central (PX)" type="button"  action="#{MbEnviarMensaje.bandejaSalida()}" />
-                                        <p></p>
-                                        <p></p>
-                                        <p:commandButton style="width:300px;" value="Perfil Cerebral" type="button"  />
-                                        <p></p>
-                                        <p></p>
-                                        <p:commandButton style="width:300px;" value="Estructura Funcional" type="button" />
-                                    </h:panelGrid>                          
-                                </h:form>
-                                <p:dialog header="Nombre" widgetVar="dlg4" showEffect="clip" hideEffect="clip" width="300" height="10" position="330,598" style="opacity:0.7;"></p:dialog>
-                            </div>      
+                            
+                            <p:commandButton value="Enviar Mensaje" class="btn-block" action="#{MbEnviarMensaje.enviarMensaje()}" />        
+                        
                         </p:dialog>  
                     
                 <div id="barraArbol">

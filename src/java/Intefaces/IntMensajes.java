@@ -6,15 +6,19 @@
 package Intefaces;
 
 import Pojo.Cuenta;
+import Pojo.Mensajes;
+import Pojo.Nodo;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author sergio
  */
-public interface Mensajes {
+public interface IntMensajes {
     
     public List getByIdcuentaMensaje(Session session,Integer idcuenta)throws Exception;
-    
+    public Mensajes saveMensaje(Session session,Transaction transaction,Integer idcuenta,int Receptor,String Peticion,Nodo nodo,Date date)throws Exception;;
 }

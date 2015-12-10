@@ -133,8 +133,11 @@
         
         var domEvents= new THREEx.DomEvents(Camara, Render.domElement);
 	// DOM event para la central
-	domEvents.addEventListener(central, 'mouseover', function(event){flag = false;}, false)
-
+	domEvents.addEventListener(central, 'mouseover', function(event){flag = false;
+        
+           
+        }, false)
+        
 	domEvents.addEventListener(central, 'mouseout', function(event){
 		// animate(id);
 		flag = true;
@@ -142,11 +145,11 @@
                 
 
 	domEvents.addEventListener(central, 'click', function(event){
-            
+             
             //alert(central.name);
             //window["cosa" + i] = "alguna otra cosa";
             //alert(cosa1);
-           
+           /*
             RemoverSphere();
             crear_ellipse();
             creaEsferas();
@@ -154,7 +157,8 @@
             {    
             dibujaEsferas();
             }
-            animacion();
+            //animacion();*/
+            PF('dlg5').show();
             
             
                 //alert(NodosHijos+"  "+nodo+"  "+nEsferas);
@@ -187,7 +191,11 @@
                 alert(this);
                 console.log(this);
             }, false)*/
-            ddomEvents[i].bind(sphere[i], 'mouseover', function(object3d){ console.log(object3d.target.name) });
+            ddomEvents[i].bind(sphere[i], 'mouseover', function(object3d)
+            {
+                console.log(object3d.target.name) 
+                alert(object3d.target.name);
+            });
         }       	// fin de DOM para cental
     }     
           

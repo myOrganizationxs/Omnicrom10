@@ -17,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class MBvalores {
 
+    private String letraA="hola";
     /**
      * Creates a new instance of MBvalores
      */
@@ -24,9 +25,15 @@ public class MBvalores {
     {
        
     }
-     public String getvalor()
-    {
-        return "este valor se pasara para hacer el arbol";
+
+    
+    
+    public String getLetraA() {
+        return letraA;
+    }
+
+    public void setLetraA(String letraA) {
+        this.letraA = letraA;
     }
     
 }
