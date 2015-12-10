@@ -46,6 +46,7 @@ public class MbEnviarMensaje implements Serializable
     private Mensajes mensajes;
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date;
+    private String peticion;
     
     public MbEnviarMensaje()
     {
@@ -143,6 +144,14 @@ public class MbEnviarMensaje implements Serializable
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getPeticion() {
+        return peticion;
+    }
+
+    public void setPeticion(String peticion) {
+        this.peticion = peticion;
     }
     
 }

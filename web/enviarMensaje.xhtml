@@ -15,10 +15,10 @@
                 <h:form>
                     <p:panelGrid columns="2">
                         <h3>Petición</h3>
-                        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+                        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} Caracteres Faltantes" autoResize="true" value="#{MbEnviarMensaje.peticion}" />
                         <p:panelGrid></p:panelGrid>
                         <h:outputText id="display" />  
-                        <p:panelGrid></p:panelGrid>
+                        <h:outputText value="#{MbEnviarMensaje.peticion}"/>
                         <h:commandButton  value="Enviar Mensaje" action="#{MbEnviarMensaje.saveMensaje()}"></h:commandButton> 
                     </p:panelGrid>                   
                     
