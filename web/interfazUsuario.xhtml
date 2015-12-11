@@ -47,9 +47,19 @@
                         </h:form>
                         </div>
                         <p:dialog style="overflow:hidden; background:graytext; opacity:.8; border-radius: 10px; " modal="true" header="Datos" widgetVar="dlg5" showEffect="clip" hideEffect="clip" width="885" height="440" position="20,170">
-                            
-                            <p:commandButton value="Enviar Mensaje" class="btn-block" action="#{MbEnviarMensaje.enviarMensaje()}" />        
-                        
+                            <div style="border-radius:100px; width:400px; height:400px;" class="row">
+                                <div style="border-radius:100px; width:400px; height:400px;" class="col-sm-6 col-md-3">
+                                  <a style="border-radius:100px; width:400px; height:400px;" href="#" class="thumbnail">
+                                   
+                                  </a>
+                                </div>
+                                ...
+                            </div>
+                            <h:panelGrid style="position:relative; bottom:400px; float:right;" columns="1">
+                            <p:commandButton style="width:250px; margin: 5px;" value="Enviar Mensaje" class="btn-block" action="#{MbEnviarMensaje.enviarMensaje()}" />
+                            <p:commandButton style="width:250px; margin: 5px;" value="Perfil Cerebral" class="btn-block" /> 
+                            <p:commandButton style="width:250px; margin: 5px;" value="Estructura Funcional" class="btn-block" /> 
+                            </h:panelGrid>
                         </p:dialog>  
                     
                 <div id="barraArbol">
