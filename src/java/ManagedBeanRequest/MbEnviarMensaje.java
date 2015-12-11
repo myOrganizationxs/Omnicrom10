@@ -47,6 +47,12 @@ public class MbEnviarMensaje implements Serializable
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date;
     private String peticion;
+    //fecha2 = a la hora que se quiere la peticion
+    private Date fecha2;
+    private int idNodo;
+    //si dice si no si condicional
+    private int Promesa;
+    private Mensajes TargerMensaje;
     
     public MbEnviarMensaje()
     {
@@ -58,22 +64,33 @@ public class MbEnviarMensaje implements Serializable
         return "/enviarMensaje?faces-redirect=true";
     }    
     
-    public String saveMensaje() throws Exception
+    public void BuscarIdNodo() throws Exception
     {
         this.session=null;
         this.transaction=null;
-        DaoNodo daoNodo = new DaoNodo();
-        DaoMensajes daoMensajes = new DaoMensajes();
-        
+        DaoNodo daoNodo = new DaoNodo();        
         this.session=HibernateUtil.getSessionFactory().openSession();
         this.transaction=this.session.beginTransaction();            
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        int idNodo = daoNodo.getByIdCuenta(session, (Integer) sessionUsuario.getAttribute("idcuenta"));
+        idNodo = daoNodo.getByIdCuenta(session, (Integer) sessionUsuario.getAttribute("idcuenta"));
+       //date= new Date();
+        //JOptionPane.showMessageDialog(null, idNodo+" "+date);
+        nodo =(Nodo) session.load(Nodo.class,idNodo);
+    }
+    public String saveMensaje() throws Exception
+    {
+        BuscarIdNodo();
+        this.session=null;
+        this.transaction=null;
+        DaoMensajes daoMensajes = new DaoMensajes();       
+        this.session=HibernateUtil.getSessionFactory().openSession();
+        this.transaction=this.session.beginTransaction();            
+        HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);      
         date= new Date();
         JOptionPane.showMessageDialog(null, idNodo+" "+date);
         nodo =(Nodo) session.load(Nodo.class,idNodo);
         
-        daoMensajes.saveMensaje(session, transaction, idNodo, 15, "hola a todos es mi primer mensaje", nodo,date);
+        daoMensajes.saveMensaje(session, transaction, idNodo, 15,peticion, nodo,date,fecha2);
         /*mensajes = new Mensajes();
         //el que manda int id
         mensajes.setEmisor(1);
@@ -122,6 +139,51 @@ public class MbEnviarMensaje implements Serializable
         return "/bandejadeSalida?faces-redirect=true";
     }
 
+    public List<Object> getByListaReceptor()
+    {
+        this.session=null;
+        this.transaction=null;
+
+        try
+        {
+            BuscarIdNodo();
+            DaoMensajes daoMensajes=new DaoMensajes();            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
+            List<Object> lista=daoMensajes.getBandejaDeEntradaByReceptor(session,idNodo);
+            //List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
+            //JOptionPane.showMessageDialog(null, lista);
+            
+            this.transaction.commit();           
+            return lista;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }
+    public String UpdateMensaje()
+    {
+        JOptionPane.showConfirmDialog(null, TargerMensaje);
+        
+        return null;
+    }
+            
     public Nodo getNodo() {
         return nodo;
     }
@@ -152,6 +214,38 @@ public class MbEnviarMensaje implements Serializable
 
     public void setPeticion(String peticion) {
         this.peticion = peticion;
+    }
+
+    public Date getFecha2() {
+        return fecha2;
+    }
+
+    public void setFecha2(Date fecha2) {
+        this.fecha2 = fecha2;
+    }
+
+    public int getIdNodo() {
+        return idNodo;
+    }
+
+    public void setIdNodo(int idNodo) {
+        this.idNodo = idNodo;
+    }
+
+    public int getPromesa() {
+        return Promesa;
+    }
+
+    public void setPromesa(int Promesa) {
+        this.Promesa = Promesa;
+    }
+
+    public Mensajes getTargerMensaje() {
+        return TargerMensaje;
+    }
+
+    public void setTargerMensaje(Mensajes TargerMensaje) {
+        this.TargerMensaje = TargerMensaje;
     }
     
 }

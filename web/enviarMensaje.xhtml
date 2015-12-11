@@ -15,10 +15,12 @@
                 <h:form>
                     <p:panelGrid columns="2">
                         <h3>Petición</h3>
-                        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} Caracteres Faltantes" autoResize="true" value="#{MbEnviarMensaje.peticion}" />
+                        <p:inputTextarea rows="5" cols="30" counter="display" maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true" value="#{MbEnviarMensaje.peticion}" />
                         <p:panelGrid></p:panelGrid>
-                        <h:outputText id="display" />  
-                        <h:outputText value="#{MbEnviarMensaje.peticion}"/>
+                        <h:outputText id="display" /> 
+                        <p:outputLabel for="datetime" value="Datetime:" />
+                        <p:calendar id="datetime" value="#{MbEnviarMensaje.fecha2}" pattern="MM/dd/yyyy HH:mm:ss" />
+                        <h:outputText/>
                         <h:commandButton  value="Enviar Mensaje" action="#{MbEnviarMensaje.saveMensaje()}"></h:commandButton> 
                     </p:panelGrid>                   
                     

@@ -20,5 +20,7 @@ import org.hibernate.Transaction;
 public interface IntMensajes {
     
     public List getByIdcuentaMensaje(Session session,Integer idcuenta)throws Exception;
-    public Mensajes saveMensaje(Session session,Transaction transaction,Integer idcuenta,int Receptor,String Peticion,Nodo nodo,Date date)throws Exception;;
+    public Mensajes saveMensaje(Session session,Transaction transaction,Integer idcuenta,int Receptor,String Peticion,Nodo nodo,Date date,Date fecha2)throws Exception;
+    public List<Object> getBandejaDeEntradaByReceptor(Session session,Integer Receptor)throws Exception;
+    public Mensajes uploadMensaje(Session session,Transaction transaction,Integer idcuenta,Integer estado,Date NuevaFecha,Nodo nodo)throws Exception;
 }

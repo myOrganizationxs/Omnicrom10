@@ -4,80 +4,63 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition template="./masterPage.xhtml">
 
-            <ui:define name="content">
-               
-                <h3 align="center">Bandeja de Entrada</h3>
-                    <p:dataTable var="" value="">
+            <ui:define name="content">         
+    <h3 align="center">Bandeja de Entrada</h3>
+    <p:dataTable var="item" paginator="false" rows="10" value="#{MbEnviarMensaje.byListaReceptor}">
+    
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
     <p:column headerText="Emisor">
-        <h:outputText value="Sergio Yza" />
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
     </p:column>
                         
     <p:column headerText="Mensaje/peticion">
-        <p:commandLink update="display" oncomplete="PF('dlg').show()" value="Diseño de las interfaces" />
-        <p:dialog modal="true" resizable="false" widgetVar="dlg" header="Descripcion del mensaje" showEffect="clip">
-        
-        <h:outputText id="display" value="Un super texto con toda la descripcion de la peticion" />
-        </p:dialog>
+        <h:outputText value="#{item[0].peticion} " />
     </p:column>
         
     <p:column headerText="Fecha y hora de envio">
-        <h:outputText value="12/12/15 11:30" />
+        <h:outputText value="#{item[0].horaEnvio}" />
     </p:column>
                         
     <p:column headerText="Fecha y hora de cumplimiento">
-        <h:outputText value="13/12/15 17:00" />
+        <h:outputText value="#{item[0].horaRecibido}" />
     </p:column>
                         
     <p:column headerText="Tiempo Restante">
         <h:outputText value="1 dia con x horas" />
     </p:column>
                         
-    <p:column headerText="¿Aceptas?">
-         
-            
-        <div class="radio">
-  <label>
-    <input type="radio" name="opciones" id="opciones_1" value="opcion_1" checked=""/>
-    Si
-  </label>
-</div>
-<div class="radio">
-  <label>
-    <input type="radio" name="opciones" id="opciones_2" value="opcion_2"/>
-    No
-  </label>
-</div>
-        <div class="radio">
-  <label>
-    <input type="radio" name="opciones" id="opciones_2" />
-    Si condicional
-  </label>
-            
-            
-</div>
-    
-        
-    
+    <p:column  headerText="¿Aceptas?" style="margin: none">
+    <h:form id="formAceptar">
+        <p:selectOneRadio id="Promesa" value="#{MbEnviarMensaje.promesa}" layout="grid" columns="1">
+            <f:selectItem itemLabel="Si" itemValue="1"  />
+            <f:selectItem itemLabel="No" itemValue="2" />
+            <f:selectItem itemLabel="Si condicional" itemValue="3"/>         
+        </p:selectOneRadio>
+         <p:calendar id="datetime2" value="#{MbEnviarMensaje.fecha2}" pattern="MM/dd/yyyy HH:mm:ss" />
+         <p:commandButton value="Aceptar" update="formAceptar"/>
+    </h:form>    
     </p:column>
     
      <p:column headerText=" barra de Estado">
         <p:progressBar widgetVar="pbAjax" ajax="true" value="50" labelTemplate="" styleClass="animated" global="true"/>
     </p:column>
+        <p:column headerText=" boton">
+            <p:commandButton value="buscar" >
+      
+        </p:commandButton>
+    </p:column>
+        
 </p:dataTable>
-                    
-                    
-                    
-                    
-                  
-               
-                
-                
             </ui:define>
 
         </ui:composition>
