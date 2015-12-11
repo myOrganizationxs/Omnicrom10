@@ -15,7 +15,12 @@
         <h2 align="center">Mi perfil</h2>      
         <h:form id="frmCuenta">
             <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
+            
             <p:dataTable id="tablaCuenta" var="item" value="#{MbRequest.cuentas}" paginator="false" rows="1"> 
+                
+                <p:column headerText="Ultima Conexion">
+                    <h:outputText value="#{item}"/>
+                </p:column>
                 <p:column headerText="Ultima Conexion">
                     <h:outputText value="#{item[0].ultimaConexion}"/>
                 </p:column>
@@ -43,9 +48,12 @@
                 </p:column>
                 <p:column headerText="Telefono">
                     <h:outputText value="#{item[1].telefono}"/>
-                </p:column>
+                </p:column> 
+            
                                 
-            </p:dataTable>                  
+            </p:dataTable> 
+            
+            
         </h:form>
         <br></br>
         <h:form>
@@ -60,29 +68,21 @@
                     <h:outputText value="Apellido Materno:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="Correo electronico:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="Telefono:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Usuario:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="Contraseña:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="ingresa de nuevo tu contraseña"></h:outputText><h:inputText></h:inputText>
+                    <h:form enctype="multipart/form-data">
+                    <p:growl id="messages" showDetail="true" />
+ 
+                        <p:fileUpload value="#{fileUploadView.file}" mode="simple" />
+ 
+                    
+                    </h:form>
                 </h:panelGrid>
                     <p:commandButton class="btn-group-vertical" value="Guardar" />
                 </h:form>
             </p:dialog>
         </h:form>
-        <div id="barraArbol">
-                    <h:form id="formArbol">           
-                        <p:tree class="arbol" value="#{MbTree.root}" var="node" dynamic="true" selection="#{MbTree.singleSelectedTreeNode}" selectionMode="single">
-                             <p:treeNode>
-                                 <h:outputText style="color:whitesmoke;" value="#{node}"  />
-                             </p:treeNode>
-                            <p:ajax event="select" listener="#{MbTree.onNodeSelect}" onstart="" update=":formAnimacion"></p:ajax>
-                        </p:tree>
-                     </h:form>
-                </div>
         
-        <h:form id="formAnimacion">
-            
-            <h:outputText style="color:red;" value="#{MbTree.suma}" />
-        </h:form>
         
             </ui:define>
 
