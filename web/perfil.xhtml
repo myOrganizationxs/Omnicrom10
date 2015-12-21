@@ -16,42 +16,42 @@
         <h:form id="frmCuenta">
             <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
             
-            <p:dataTable id="tablaCuenta" var="item" value="#{MbRequest.cuentas}" paginator="false" rows="1"> 
+            <p:dataList style=" list-style-type: none; border:none;" id="tablaCuenta"  var="item" value="#{MbRequest.cuentas}" paginator="false" rows="1"> 
+                <p:panelGrid columns="2">
+                 <h:outputText style="font-weight: bold;" value="foto"/>
+                    <h:outputText  value="#{item}"/>
                 
-                <p:column headerText="Ultima Conexion">
-                    <h:outputText value="#{item}"/>
-                </p:column>
-                <p:column headerText="Ultima Conexion">
-                    <h:outputText value="#{item[0].ultimaConexion}"/>
-                </p:column>
-                <p:column headerText="Fecha de Creacion">
-                    <h:outputText value="#{item[0].fechaCreacion}"/>
-                </p:column>
-                <p:column headerText="Contraseña">
-                    <h:outputText value="#{item[0].contrasena}"/>
-                </p:column>
-                <p:column headerText="Usuario">
-                    <h:outputText value="#{item[0].usuario}"/>
-                </p:column>
+                 <h:outputText style="font-weight: bold;" value="Ultima conexion:"/>
+                    <h:outputText  value="#{item[0].ultimaConexion}"/>
                 
-                <p:column headerText="Nombre">
-                    <h:outputText value="#{item[1].nombreUsu}"/>
-                </p:column>
-                <p:column headerText="Apellido Paterno">
-                    <h:outputText value="#{item[1].apellidoPaterno}"/>
-                </p:column>
-                <p:column headerText="Apellido Materno">
-                    <h:outputText value="#{item[1].apellidoMaterno}"/>
-                </p:column>
-                <p:column headerText="Correo">
-                    <h:outputText value="#{item[1].correoElectro}"/>
-                </p:column>
-                <p:column headerText="Telefono">
+                 <h:outputText style="font-weight: bold;" value="Fecha de creacion:"/>
+                    <h:outputText  value="#{item[0].fechaCreacion}"/>
+                
+                 <h:outputText style="font-weight: bold;" value="Contraseña:"/>
+                    <h:outputText  value="#{item[0].contrasena}"/>
+                
+                 <h:outputText style="font-weight: bold;" value="Usuario:"/>
+                    <h:outputText  value="#{item[0].usuario}"/>
+                
+                
+                 <h:outputText style="font-weight: bold;" value="Nombre:"/>
+                    <h:outputText  value="#{item[1].nombreUsu}"/>
+               
+                 <h:outputText style="font-weight: bold;" value="Apellido Paterno:"/>
+                    <h:outputText  value="#{item[1].apellidoPaterno}"/>
+               
+                 <h:outputText style="font-weight: bold;" value="Apellido Materno:"/>
+                    <h:outputText  value="#{item[1].apellidoMaterno}"/>
+                
+                 <h:outputText style="font-weight: bold;" value="correo:"/>
+                    <h:outputText  value="#{item[1].correoElectro}"/>
+                
+                 <h:outputText style="font-weight: bold;" value="Telefono:"/>
                     <h:outputText value="#{item[1].telefono}"/>
-                </p:column> 
+                 
             
-                                
-            </p:dataTable> 
+                </p:panelGrid>             
+            </p:dataList> 
             
             
         </h:form>
@@ -70,14 +70,16 @@
                     <h:outputText value="Telefono:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="Contraseña:"></h:outputText><h:inputText></h:inputText>
                     <h:outputText value="ingresa de nuevo tu contraseña"></h:outputText><h:inputText></h:inputText>
-                    <h:form enctype="multipart/form-data">
-                    <p:growl id="messages" showDetail="true" />
- 
-                        <p:fileUpload value="#{fileUploadView.file}" mode="simple" />
- 
+                    
+                    
+                </h:panelGrid>
+                    
+                    <h:form id="foto" enctype="multipart/form-data">
+                        <h:inputHidden value="#{MbRequest.usuarios.idUsuario}"/>
+                        <p:fileUpload id="fotox" value="#{MbRequest.foto}" mode="simple" /> 
+                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbRequest.actualizarAvatar()}"/>
                     
                     </h:form>
-                </h:panelGrid>
                     <p:commandButton class="btn-group-vertical" value="Guardar" />
                 </h:form>
             </p:dialog>
