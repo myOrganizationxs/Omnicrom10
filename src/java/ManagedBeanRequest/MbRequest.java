@@ -49,7 +49,12 @@ public class MbRequest implements Serializable{
             this.transaccion=this.session.beginTransaction();            
             HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
             List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
-            this.transaccion.commit();           
+ 
+                    //NombreCompleto=(String) alist[0]+" "+alist[1]+" "+alist[2];
+                    //HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
+                    //httpSession.setAttribute("idNodo", alist[3]);
+                    //JOptionPane.showMessageDialog(null,  alist.);
+            this.transaccion.commit();                         
             return lista;
         }
         catch(Exception ex)

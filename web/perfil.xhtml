@@ -18,7 +18,11 @@
             
             <p:dataList style=" list-style-type: none; border:none;" id="tablaCuenta"  var="item" value="#{MbRequest.cuentas}" paginator="false" rows="1"> 
                 <p:panelGrid columns="2">
-                 <h:outputText style="font-weight: bold;" value="foto"/>
+                 
+                    <h:outputText style="font-weight: bold;" value="id Usuario"/>
+                    <h:outputText  value="#{item[1].idUsuario}"/>
+                    
+                    <h:outputText style="font-weight: bold;" value="foto"/>
                     <h:outputText  value="#{item}"/>
                 
                  <h:outputText style="font-weight: bold;" value="Ultima conexion:"/>
@@ -50,41 +54,48 @@
                     <h:outputText value="#{item[1].telefono}"/>
                  
             
-                </p:panelGrid>             
-            </p:dataList> 
-            
-            
-        </h:form>
-        <br></br>
-        <h:form>
-            <h:panelGrid columns="1" cellpadding="5" >
+                </p:panelGrid>    
+                 <h:panelGrid columns="1" cellpadding="5" >
                 <p:commandButton class="btn-primary" value="Modificar" type="button" onclick="PF('dlg6').show();" />
             </h:panelGrid>
+                
+               <h:panelGrid columns="1" cellpadding="5" >
+                <p:commandButton class="btn-primary" value="Actualizar foto" type="button" onclick="PF('dlg7').show();" />
+            </h:panelGrid>
+                
             <p:dialog style="z-index:1;" header="Modificar" modal="true" widgetVar="dlg6" showEffect="clip" hideEffect="clip">
                 <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputText value="Nombre:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Apellido Paterno:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Apellido Materno:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Correo electronico:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Telefono:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="Contraseña:"></h:outputText><h:inputText></h:inputText>
-                    <h:outputText value="ingresa de nuevo tu contraseña"></h:outputText><h:inputText></h:inputText>
-                    
-                    
+                    <h:outputText value="Nombre:"></h:outputText><h:inputText value="#{item[1].nombreUsu}"></h:inputText>
+                    <h:outputText value="Apellido Paterno:"></h:outputText><h:inputText value="#{item[1].apellidoPaterno}"></h:inputText>
+                    <h:outputText value="Apellido Materno:"></h:outputText><h:inputText value="#{item[1].apellidoMaterno}"></h:inputText>
+                    <h:outputText value="Correo electronico:"></h:outputText><h:inputText value="#{item[1].correoElectro}"></h:inputText>
+                    <h:outputText value="Telefono:"></h:outputText><h:inputText value="#{item[1].telefono}"></h:inputText>
+                    <h:outputText value="Contraseña:"></h:outputText ><h:inputText value="#{item[0].contrasena}"></h:inputText>
+                    <h:outputText value="ingresa de nuevo tu contraseña"></h:outputText><h:inputText></h:inputText>                    
+                    <p:commandButton class="btn-group-vertical" value="Guardar" />
                 </h:panelGrid>
+                </h:form>
+                 </p:dialog  >
                     
+                <p:dialog style="z-index:1;" header="Modificar" modal="true" widgetVar="dlg7" showEffect="clip" hideEffect="clip">
                     <h:form id="foto" enctype="multipart/form-data">
-                        <h:inputHidden value="#{MbRequest.usuarios.idUsuario}"/>
-                        <p:fileUpload id="fotox" value="#{MbRequest.foto}" mode="simple" /> 
-                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbRequest.actualizarAvatar()}"/>
+                        <h:inputHidden value="#{item[1].idUsuario}"/>
+                        <p:fileUpload id="fotox" value="#{mbFoto.foto}" mode="simple" /> 
+                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbSession.cerrarSesion()}"/>
                     
                     </h:form>
-                    <p:commandButton class="btn-group-vertical" value="Guardar" />
-                </h:form>
-            </p:dialog>
+                    
+                
+                </p:dialog >
+            </p:dataList>            
         </h:form>
-        
+                <h:form id="foto" enctype="multipart/form-data">
+
+                        <p:fileUpload id="fotox" value="#{MbFoto.foto}" mode="simple" /> 
+                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbFoto.actualizarFoto()}"/>
+                    
+                    </h:form>
         
             </ui:define>
 

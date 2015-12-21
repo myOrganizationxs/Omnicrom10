@@ -75,7 +75,7 @@ public class DaoCuenta implements Cuentas
     @Override
     public List getByIdcuentaNombre(Session session, Integer idcuenta) throws Exception {
         try{
-            String hql="select u.nombreUsu,u.apellidoPaterno,u.apellidoMaterno, n.idNodo from Cuenta c  inner join c.usuarios u inner join u.nodo n where c.idCuenta=:idCuenta";
+            String hql="select u.nombreUsu,u.apellidoPaterno,u.apellidoMaterno,n.idNodo,u.idUsuario from Cuenta c  inner join c.usuarios u inner join u.nodo n where c.idCuenta=:idCuenta";
             Query query=session.createQuery(hql);
             query.setParameter("idCuenta", idcuenta);
             //JOptionPane.showMessageDialog(null,"LLega aqui 1");

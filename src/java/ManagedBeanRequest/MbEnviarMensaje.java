@@ -11,6 +11,7 @@ import Dao.DaoNodo;
 import HibernateUtil.HibernateUtil;
 import Pojo.Mensajes;
 import Pojo.Nodo;
+import Pojo.Usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;

@@ -120,9 +120,10 @@ public class MbSession implements Serializable{
                 List<Object[]> lista =daoCuenta.getByIdcuentaNombre(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));                    
                 for (Object[] alist : lista)
                 {
-                    NombreCompleto=(String) alist[0]+" "+alist[1]+" "+alist[2];
+                NombreCompleto=(String) alist[0]+" "+alist[1]+" "+alist[2];
                     HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
                     httpSession.setAttribute("idNodo", alist[3]);
+                    httpSession.setAttribute("idUsuario", alist[4]);
                 }
                 this.transaction.commit();
                 return NombreCompleto;
