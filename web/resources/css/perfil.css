@@ -4,11 +4,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 16/12/2015, 11:17:54 AM
+    Created on : 21/12/2015, 08:56:43 PM
     Author     : jesus
 */
 
-.negritas
+body
 {
-    font-weight: bold;
+    background:red;
 }

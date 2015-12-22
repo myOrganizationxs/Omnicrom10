@@ -11,33 +11,26 @@
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                <p:dataTable var="" value="" paginator="true" rows="4" >
-                <f:facet name="header">
-                     Perspectiva Financiera
-                </f:facet>    
     
-                                       
+    <p:dataTable var="" value="" paginator="true" rows="4" >
+        <f:facet name="header">
+            Perspectiva Financiera
+        </f:facet>    
+                                   
     <p:column headerText="Objetivos" width="350">
         <p:inputText style="width:320px; height:40px; margin-left: 5px;"></p:inputText>
     </p:column>
-        
     <p:column headerText="Indicadores">
         <h:outputText value="" />
     </p:column>
-                        
     <p:column headerText="Objetivo" width="200">
         <h:outputText value="" />
-    </p:column>
-                        
+    </p:column>       
     <p:column headerText="Actual" width="200">
         <h:outputText value="" />
     </p:column>
-                        
-         <p:column headerText="Anterior" width="200">
-        
-         </p:column>
-                        
-         
+    <p:column headerText="Anterior" width="200">
+    </p:column>
 </p:dataTable>
             </ui:define>
 
