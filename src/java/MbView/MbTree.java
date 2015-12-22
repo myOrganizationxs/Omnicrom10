@@ -88,6 +88,7 @@ public class MbTree implements Serializable
         }
         
     }
+    
     //inicia la forma dinamica de hacer el arbol
     public List getNodoCentro()
     {

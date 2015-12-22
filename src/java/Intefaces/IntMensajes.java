@@ -23,4 +23,9 @@ public interface IntMensajes {
     public Mensajes saveMensaje(Session session,Transaction transaction,Integer idcuenta,int Receptor,String Peticion,Nodo nodo,Date date,Date fecha2)throws Exception;
     public List<Object> getBandejaDeEntradaByReceptor(Session session,Integer Receptor)throws Exception;
     public Mensajes uploadMensajeSi(Mensajes mensajes,Session session,Transaction transaction)throws Exception;
+    public List getBandejaDeEntradaByReceptorProceso(Session session,Integer idcuenta)throws Exception;
+    public Mensajes uploadMensajeNo(Mensajes mensajes,Session session,Transaction transaction)throws Exception;
+    public List getBandejaDeEntradaByReceptorNo(Session session,Integer idcuenta)throws Exception;
+    public Mensajes uploadMensajeSiCondicional(Mensajes mensajes,Session session,Transaction transaction,Date date)throws Exception;
+    public List getBandejaDeEntradaByReceptorSiCOndicional(Session session,Integer idcuenta)throws Exception;
 }

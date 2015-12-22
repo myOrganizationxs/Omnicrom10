@@ -107,6 +107,7 @@ public class MbSession implements Serializable{
         return "/login?faces-redirect=true";
     }
     
+    
     public String getNombreComplete()
     {
         try

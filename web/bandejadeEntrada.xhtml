@@ -13,7 +13,7 @@
 
             <ui:define name="content">         
     <h3 align="center">Bandeja de Entrada</h3>
-    <p:dataTable var="item" paginator="false" rows="10" value="#{MbEnviarMensaje.byListaReceptor}">
+    <p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaReceptor}">
     
     <p:column headerText="ID">
         <h:outputText value="#{item[0].idMensajes} " />
@@ -47,11 +47,103 @@
             <f:selectItem itemLabel="Si condicional" itemValue="3"/>         
         </p:selectOneRadio>
          <p:calendar id="datetime2" value="#{MbEnviarMensaje.fecha2}" pattern="MM/dd/yyyy HH:mm:ss" />
-         <p:commandButton value="Aceptar" update="formAceptar"/>
+        
+         <p:commandButton value="Aceptar" update="formAceptar" oncomplete="#{MbEnviarMensaje.responderMensaje}">
+             <f:setPropertyActionListener value="#{item[0].idMensajes}" target="#{MbEnviarMensaje.targerMensaje}" />
+         </p:commandButton>
     </h:form>    
     </p:column>
     
           
+</p:dataTable>
+<h3 align="center">En Procreso</h3>
+<p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaReceptorProceso}">
+    
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
+                        
+    <p:column headerText="Mensaje/peticion">
+        <h:outputText value="#{item[0].peticion} " />
+    </p:column>
+        
+    <p:column headerText="Fecha y hora de envio">
+        <h:outputText value="#{item[0].horaEnvio}" />
+    </p:column>
+                        
+    <p:column headerText="Fecha y hora de cumplimiento">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+                        
+    <p:column headerText="Tiempo Restante">
+        <h:outputText value="1 dia con x horas" />
+    </p:column>
+                               
+</p:dataTable>
+<h3 align="center">No</h3>
+<p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaReceptorNo}">
+    
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
+                        
+    <p:column headerText="Mensaje/peticion">
+        <h:outputText value="#{item[0].peticion} " />
+    </p:column>
+        
+    <p:column headerText="Fecha y hora de envio">
+        <h:outputText value="#{item[0].horaEnvio}" />
+    </p:column>
+                        
+    <p:column headerText="Fecha y hora de cumplimiento">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+                        
+    <p:column headerText="Tiempo Restante">
+        <h:outputText value="1 dia con x horas" />
+    </p:column>
+                               
+</p:dataTable>
+
+<h3 align="center">Si COndicional en espera</h3>
+<p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaReceptorSiCondicional}">
+    
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
+                        
+    <p:column headerText="Mensaje/peticion">
+        <h:outputText value="#{item[0].peticion} " />
+    </p:column>
+        
+    <p:column headerText="Fecha y hora de envio">
+        <h:outputText value="#{item[0].horaEnvio}" />
+    </p:column>
+                        
+    <p:column headerText="Fecha y hora que fueron propuestas">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+    
+    <p:column headerText="Nueva fecha y hora a cumplir">
+        <h:outputText value="#{item[0].tiempoProceso}" />
+    </p:column>
+                        
+    <p:column headerText="Tiempo Restante">
+        <h:outputText value="1 dia con x horas" />
+    </p:column>
+                               
 </p:dataTable>
             </ui:define>
 

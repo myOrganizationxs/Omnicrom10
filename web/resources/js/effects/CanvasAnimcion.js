@@ -40,7 +40,7 @@
         var variableAnimacion = true;
         //variable tiempo para aumentar
         var tiempo=0;
-        var tiempozoom=130;
+        var tiempozoom=200;
         var variablevelocidad=.02;
         var arregloDeSuma;
         var ddomEvents;
@@ -114,7 +114,7 @@
         function crear_ellipse(){	
 	// Geometría
         
-        material = new THREE.LineBasicMaterial({color:0x8D7A7A, opacity:1});
+        material = new THREE.LineBasicMaterial({color:0xffffff, opacity:1});
 	ellipse = new THREE.EllipseCurve(0, 0, 30, 20, 0, 2 * Math.PI, false);
 	ellipsePath = new THREE.CurvePath();
 		ellipsePath.add(ellipse);
@@ -191,44 +191,11 @@
                 alert(this);
                 console.log(this);
             }, false)*/
-            
-            
             ddomEvents[i].bind(sphere[i], 'mouseover', function(object3d)
             {
+                console.log(object3d.target.name) 
                 alert(object3d.target.name);
-                flag = false;
-                 
-                
-            },false);
-            
-            ddomEvents[i].addEventListener(sphere[i], 'mouseout', function(object3d)
-            {
-                
-                flag = true;
-                 
-                
-            },false);
-            
-            ddomEvents[i].addEventListener(sphere[i],'click', function(event){
-             
-            //alert(central.name);
-            //window["cosa" + i] = "alguna otra cosa";
-            //alert(cosa1);
-           
-            RemoverSphere();
-            crear_ellipse();
-            creaEsferas();
-            if(nEsferas!==0)
-            {    
-            dibujaEsferas();
-            }
-            //animacion();*/
-            
-            
-            
-                //alert(NodosHijos+"  "+nodo+"  "+nEsferas);
-		// window.location = 'https://www.facebook.com';
-	}, false)
+            });
         }       	// fin de DOM para cental
     }     
           

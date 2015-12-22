@@ -70,12 +70,14 @@ public class MbFoto implements Serializable
             JOptionPane.showMessageDialog(null,"error: "+e);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+e.getMessage()));
         }
+        
     }           
     
     public Integer getIdFoto()
     {
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        return (Integer)sessionUsuario.getAttribute("idUsuario");      
+        return (Integer)sessionUsuario.getAttribute("idUsuario");
+        
     }
     
     public UploadedFile getFoto() {

@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,11 +37,10 @@ import org.hibernate.Transaction;
  * @author sergio
  */
 @ManagedBean(name="MbEnviarMensaje")
-@RequestScoped
+@ViewScoped
 public class MbEnviarMensaje implements Serializable 
 {
      
-    private int radioRespiuesta;
     private Session session;
     private Transaction transaction;
     private Nodo nodo;
@@ -54,7 +53,7 @@ public class MbEnviarMensaje implements Serializable
     private int idNodo;
     //si dice si no si condicional
     private int Promesa;
-    private Mensajes TargerMensaje;
+    private int TargerMensaje;
     
     public MbEnviarMensaje()
     {
@@ -131,10 +130,55 @@ public class MbEnviarMensaje implements Serializable
         return"/interfazUsuario?faces-redirect=true";
   
     }
-    public String MensajeSi() throws Exception
+    public String getResponderMensaje() throws Exception
     {
+        DaoMensajes daoMensajes = new DaoMensajes();
+        
+        switch( Promesa ) {
+        case 1:
+       
+            
+            this.session=null;
+            this.transaction=null;      
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();              
+            mensajes =(Mensajes) session.load(Mensajes.class,TargerMensaje);
+            JOptionPane.showMessageDialog(null,"Aceptaste el mesaje con id: "+mensajes.getIdMensajes());
+            daoMensajes.uploadMensajeSi(mensajes, session, transaction);
+            
+            
+            break;
+            
+        
+        case 2:
+            
+            this.session=null;
+            this.transaction=null;      
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();              
+            mensajes =(Mensajes) session.load(Mensajes.class,TargerMensaje);
+            JOptionPane.showMessageDialog(null,"No Aceptaste el mesaje con id: "+mensajes.getIdMensajes());
+            daoMensajes.uploadMensajeNo(mensajes, session, transaction);
+            
+        break;
+        
+        case 3:
+            this.session=null;
+            this.transaction=null;      
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();              
+            mensajes =(Mensajes) session.load(Mensajes.class,TargerMensaje);
+            JOptionPane.showMessageDialog(null,"No Aceptaste el mesaje con id: "+mensajes.getIdMensajes());
+            daoMensajes.uploadMensajeSiCondicional(mensajes, session, transaction, fecha2);
+        break;
+    
+        default:
+            JOptionPane.showMessageDialog(null,"Selecciona algo");
+        break;
+        }
+        
         return null;
- 
+        //JOptionPane.showMessageDialog(null, TargerMensaje);
     }
     
     public String bandejaEntrada()
@@ -148,6 +192,7 @@ public class MbEnviarMensaje implements Serializable
 
     public List<Object> getByListaReceptor()
     {
+        
         this.session=null;
         this.transaction=null;
 
@@ -184,13 +229,124 @@ public class MbEnviarMensaje implements Serializable
             }
         }
     }
-    public String UpdateMensaje()
+    public List<Object> getByListaReceptorProceso()
     {
-        JOptionPane.showConfirmDialog(null, TargerMensaje);
         
-        return null;
-    }
+        this.session=null;
+        this.transaction=null;
+
+        try
+        {
+            BuscarIdNodo();
+            DaoMensajes daoMensajes=new DaoMensajes();            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
+            List<Object> lista=daoMensajes.getBandejaDeEntradaByReceptorProceso(session,idNodo);
+            //List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
+            //JOptionPane.showMessageDialog(null, lista);
             
+            this.transaction.commit();           
+            return lista;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }
+    
+    public List<Object> getByListaReceptorNo()
+    {
+        
+        this.session=null;
+        this.transaction=null;
+
+        try
+        {
+            BuscarIdNodo();
+            DaoMensajes daoMensajes=new DaoMensajes();            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
+            List<Object> lista=daoMensajes.getBandejaDeEntradaByReceptorNo(session,idNodo);
+            //List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
+            //JOptionPane.showMessageDialog(null, lista);
+            
+            this.transaction.commit();           
+            return lista;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }      
+    public List<Object> getByListaReceptorSiCondicional()
+    {
+        
+        this.session=null;
+        this.transaction=null;
+
+        try
+        {
+            BuscarIdNodo();
+            DaoMensajes daoMensajes=new DaoMensajes();            
+            this.session=HibernateUtil.getSessionFactory().openSession();
+            this.transaction=this.session.beginTransaction();            
+            HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);           
+            List<Object> lista=daoMensajes.getBandejaDeEntradaByReceptorSiCOndicional(session, idNodo);
+            //List lista =daoCuenta.getByIdcuenta(this.session, (Integer) sessionUsuario.getAttribute("idcuenta"));          
+            //JOptionPane.showMessageDialog(null, lista);
+            
+            this.transaction.commit();           
+            return lista;
+        }
+        catch(Exception ex)
+        {
+            if(this.transaction!=null)
+            {
+                this.transaction.rollback();
+            }
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador "+ex.getMessage()));
+            
+            return null;
+        }
+        finally
+        {
+            if(this.session!=null)
+            {
+                this.session.close();
+            }
+        }
+    }      
     public Nodo getNodo() {
         return nodo;
     }
@@ -247,20 +403,12 @@ public class MbEnviarMensaje implements Serializable
         this.Promesa = Promesa;
     }
 
-    public Mensajes getTargerMensaje() {
+    public int getTargerMensaje() {
         return TargerMensaje;
     }
 
-    public void setTargerMensaje(Mensajes TargerMensaje) {
+    public void setTargerMensaje(int TargerMensaje) {
         this.TargerMensaje = TargerMensaje;
     }
 
-    public int getRadioRespiuesta() {
-        return radioRespiuesta;
-    }
-
-    public void setRadioRespiuesta(int radioRespiuesta) {
-        this.radioRespiuesta = radioRespiuesta;
-    }
-    
 }
