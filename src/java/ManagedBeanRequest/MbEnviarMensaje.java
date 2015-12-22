@@ -41,6 +41,7 @@ import org.hibernate.Transaction;
 public class MbEnviarMensaje implements Serializable 
 {
      
+    private int radioRespiuesta;
     private Session session;
     private Transaction transaction;
     private Nodo nodo;
@@ -90,7 +91,7 @@ public class MbEnviarMensaje implements Serializable
         date= new Date();
         JOptionPane.showMessageDialog(null, idNodo+" "+date);
         nodo =(Nodo) session.load(Nodo.class,idNodo);
-        
+        //falta el que le va allegar con webservice
         daoMensajes.saveMensaje(session, transaction, idNodo, 15,peticion, nodo,date,fecha2);
         /*mensajes = new Mensajes();
         //el que manda int id
@@ -129,6 +130,11 @@ public class MbEnviarMensaje implements Serializable
         
         return"/interfazUsuario?faces-redirect=true";
   
+    }
+    public String MensajeSi() throws Exception
+    {
+        return null;
+ 
     }
     
     public String bandejaEntrada()
@@ -247,6 +253,14 @@ public class MbEnviarMensaje implements Serializable
 
     public void setTargerMensaje(Mensajes TargerMensaje) {
         this.TargerMensaje = TargerMensaje;
+    }
+
+    public int getRadioRespiuesta() {
+        return radioRespiuesta;
+    }
+
+    public void setRadioRespiuesta(int radioRespiuesta) {
+        this.radioRespiuesta = radioRespiuesta;
     }
     
 }

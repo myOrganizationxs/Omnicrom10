@@ -59,9 +59,6 @@
                 <p:commandButton class="btn-primary" value="Modificar" type="button" onclick="PF('dlg6').show();" />
             </h:panelGrid>
                 
-               <h:panelGrid columns="1" cellpadding="5" >
-                <p:commandButton class="btn-primary" value="Actualizar foto" type="button" onclick="PF('dlg7').show();" />
-            </h:panelGrid>
                 
             <p:dialog style="z-index:1;" header="Modificar" modal="true" widgetVar="dlg6" showEffect="clip" hideEffect="clip">
                 <h:form>
@@ -78,22 +75,12 @@
                 </h:form>
                  </p:dialog  >
                     
-                <p:dialog style="z-index:1;" header="Modificar" modal="true" widgetVar="dlg7" showEffect="clip" hideEffect="clip">
-                    <h:form id="foto" enctype="multipart/form-data">
-                        <h:inputHidden value="#{item[1].idUsuario}"/>
-                        <p:fileUpload id="fotox" value="#{mbFoto.foto}" mode="simple" /> 
-                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbSession.cerrarSesion()}"/>
-                    
-                    </h:form>
-                    
-                
-                </p:dialog >
             </p:dataList>            
         </h:form>
                 <h:form id="foto" enctype="multipart/form-data">
-
+                    <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/fotoUsuario/#{MbFoto.idFoto}.png"></p:graphicImage>
                         <p:fileUpload id="fotox" value="#{MbFoto.foto}" mode="simple" /> 
-                        <p:commandButton value="Guardar foto" ajax="false" actionListener="#{MbFoto.actualizarFoto()}"/>
+                        <p:commandButton value="Actualizar foto" ajax="false" actionListener="#{MbFoto.actualizarFoto()}"/>
                     
                     </h:form>
         

@@ -101,14 +101,12 @@ public class DaoMensajes implements IntMensajes{
     }
 
     @Override
-    public Mensajes uploadMensaje(Session session, Transaction transaction, Integer idcuenta, Integer estado, Date NuevaFecha,Nodo nodo) throws Exception {
+    public Mensajes uploadMensajeSi(Mensajes mensajes,Session session, Transaction transaction) throws Exception {
        
-        Mensajes mensajes = new Mensajes();        
-        mensajes = new Mensajes();
+
         //el que manda int id
         //Leido o No leido
-        mensajes.setEstadoMensaje(estado);
-        mensajes.setHoraRecibido(NuevaFecha);
+        mensajes.setEstadoMensaje(2);
         //la hora que se envia
         //hora cuando se acepta
         //texto que se va a poner
@@ -124,7 +122,7 @@ public class DaoMensajes implements IntMensajes{
         //nodo.setMensajeses(set2);       
         //nodo.setCargo("hola a todos");
         //session.saveOrUpdate(nodo);
-        session.saveOrUpdate(mensajes);
+        session.update(mensajes);       
         JOptionPane.showMessageDialog(null,"guardado correcto");
         transaction.commit();  
         session.close();
