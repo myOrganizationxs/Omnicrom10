@@ -12,7 +12,7 @@
 
             <ui:define name="content">
              
-        
+         <h:outputStylesheet name="./css/perfiles.css"/>
         <h2 align="center">Mi perfil</h2>      
         <h:form id="frmCuenta">
             <p:growl id="mensajeGeneral" showDetail="true" sticky="false" />
@@ -73,7 +73,7 @@
                     
             </p:dataList>            
         </h:form>
-                <h:form style="position:relative; left:600px; bottom:370px; width:400px;" id="foto" enctype="multipart/form-data">
+                <h:form style="position:relative; left:600px; bottom:330px; width:400px;" id="foto" enctype="multipart/form-data">
                     <div id="c-foto">    
                         <p:graphicImage style="border-radius: 200px;" width="300px" height="300px" value="#{FacesContext.getCurrentInstance().getExternalContext()}/fotoUsuario/#{MbFoto.idFoto}.png"></p:graphicImage>
                     </div>    

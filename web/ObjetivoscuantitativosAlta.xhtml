@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
@@ -25,20 +25,16 @@
         </f:facet>    
                                    
     <p:column headerText="Objetivos" >
-        <p:outputLabel value="#{p.objetivo}" style="width:320px; height:40px; margin-left: 5px;"></p:outputLabel>
+        <p:commandButton value="Agregar Objetivo" onclick="PF('Aobj').show();"/>
     </p:column>
     <p:column headerText="Indicadores">
-        <p:commandLink value="indicador"  oncomplete="PF('indi').show();"></p:commandLink>
+         <p:commandButton value="Agregar Indicador" onclick="PF('Aind').show();"/>
     </p:column>
     <p:column headerText="Meta" width="200">
-        <h:outputLabel value="#{p.meta}" />
+        <p:commandButton value="Agregar Meta" onclick="PF('Ameta').show();"/>
     </p:column>       
-    <p:column headerText="Calcular Resultado" width="200">
-        <p:commandLink value="Calcular"  oncomplete="PF('calc').show();"></p:commandLink>
-    </p:column>
-    <p:column headerText="Actual" width="200">
-        <h:outputLabel value="#{p.actual}" />
-    </p:column>
+    
+    
     <p:column headerText="grafica" width="200">
         <p:commandLink value="grafica" oncomplete="PF('diagra').show();"></p:commandLink>
     </p:column>
@@ -46,7 +42,33 @@
                 </h:form>
                 
                 <h:form>
-                   
+                    <p:dialog header="Agregar Objetivo" widgetVar="Aobj" modal="true" height="200">
+                        <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
+                        <p></p>
+                        <p:commandButton  value="Guardar"></p:commandButton> 
+                    </p:dialog>
+                    <p:dialog header="Agregar Indicador" widgetVar="Aind" modal="true" height="250">
+                        <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
+                        <p></p>
+                        <h:selectOneMenu id="txt3" value="#{selectorView.text3}" required="true" label="Text 3">
+                                    <f:selectItem itemLabel="Operacion" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Suma" itemValue="1" />
+                                    <f:selectItem itemLabel="Resta" itemValue="2" />
+                                    <f:selectItem itemLabel="Multiplicacion" itemValue="3" />
+                                    <f:selectItem itemLabel="Division" itemValue="4" />
+                        </h:selectOneMenu>
+                        <p></p>
+                        <h:inputText style="width:100px;" value="hola"></h:inputText>
+                        <h:outputText style="margin-left: 35px;" value="+"></h:outputText>
+                        <h:inputText style="width:100px; margin-left: 35px;" value="hola"></h:inputText>
+                        <p></p>
+                        <p:commandButton  value="Guardar"></p:commandButton> 
+                    </p:dialog>
+                    <p:dialog header="Agregar Meta" widgetVar="Ameta" modal="true" height="200">
+                        <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
+                        <p></p>
+                        <p:commandButton  value="Guardar"></p:commandButton> 
+                    </p:dialog>
                     <p:dialog  header="Indicadores" modal="true" widgetVar="indi" width="800">
                         <p:dataTable value="" var="">
                             <p:column headerText="Indicador">
@@ -54,9 +76,9 @@
                             </p:column>
                             <p:column headerText="Formula" width="300">
                                 
-                                <h:outputText style="width:100px;" value="hola"></h:outputText>
+                                <h:inputText style="width:100px;" value="hola"></h:inputText>
                                 <h:outputText style="margin-left: 35px;" value="+"></h:outputText>
-                                <h:outputText style="width:100px; margin-left: 35px;" value="hola"></h:outputText>
+                                <h:inputText style="width:100px; margin-left: 35px;" value="hola"></h:inputText>
                             </p:column>
                             <!--<p:column headerText="Operacion">
                                 <h:selectOneMenu id="txt3" value="#{selectorView.text3}" required="true" label="Text 3">

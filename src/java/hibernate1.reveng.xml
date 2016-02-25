@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="elipso"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="orbita"/>
+  <table-filter match-name="indicadores"/>
+  <table-filter match-name="indicadores_objetivos"/>
+  <table-filter match-name="nodo"/>
+  <table-filter match-name="organizacion"/>
+  <table-filter match-name="objetivos"/>
+  <table-filter match-name="cuenta"/>
+  <table-filter match-name="mensajes"/>
+</hibernate-reverse-engineering>

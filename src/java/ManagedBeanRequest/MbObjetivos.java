@@ -28,4 +28,9 @@ public class MbObjetivos implements Serializable
     {
         return "/objetivosCuantitativos?faces-redirect=true";
     }
+    
+    public String enviarCuantitativosAlta()
+    {
+        return "/ObjetivoscuantitativosAlta?faces-redirect=true";
+    }
 }

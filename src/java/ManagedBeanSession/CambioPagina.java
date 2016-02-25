@@ -31,5 +31,6 @@ public class CambioPagina implements Serializable
     {   
         return "/enviarMensaje";
     }
-
+    
+    
 }

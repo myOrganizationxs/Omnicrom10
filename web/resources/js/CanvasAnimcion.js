@@ -52,7 +52,8 @@
             
         } 
         
-        var Render=new THREE.WebGLRenderer();		
+        var Render=new THREE.WebGLRenderer();
+        
         ////El escenario
 	var Escenario=new THREE.Scene();
         var keyboard = new THREEx.KeyboardState();

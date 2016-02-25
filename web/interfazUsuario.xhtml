@@ -6,13 +6,14 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+        
     
-    <body id="interfazUsu">
-
+        
+    <body style="background:red;"> 
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                 
+                <h:outputStylesheet name="./css/usuario.css"/>
                 <div style="width:100%; height:120px;">
                 <div id="mundo">
                     <div class="frontal"></div>
@@ -38,10 +39,20 @@
                             <p:dialog header="Vision" widgetVar="dlg2" showEffect="clip" hideEffect="clip" width="885" height="75" position="20,535">
                                 <h:outputText value="Mision de la empresa" />
                             </p:dialog>
-                            <p:dialog header="Objetivos" widgetVar="dlg3" showEffect="clip" hideEffect="clip" width="250" height="75" position="20,535">
+                            <p:dialog header="Objetivos" widgetVar="dlg3" showEffect="clip" hideEffect="clip" width="320" height="120" position="20,455">
                                 <h:panelGrid columns="1">
-                                    <p:commandButton value="Objetivos Cualitativos" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
-                                    <p:commandButton value="Objetivos Cuantitativos" class="btn-block" action="#{MbObjetivos.enviarCuantitavos()}" />
+                                    <!--<p:commandButton value="Objetivos Cualitativos" class="btn-block" action="#{MbEnviarMensaje.bandejaSalida()}" />
+                                    <p:commandButton value="Objetivos Cuantitativos" class="btn-block" action="#{MbObjetivos.enviarCuantitavos()}" />!-->
+                                    <p:slideMenu style="width:300px">
+                                        <p:submenu label="Objetivos cuantitativos">
+                                            <p:menuitem value="Alta" action="#{MbObjetivos.enviarCuantitativosAlta()}" />
+                                            <p:menuitem value="Consulta" action="#{MbObjetivos.enviarCuantitavos()}"  />
+                                        </p:submenu>
+                                        <p:submenu label="Objetivos Cualitativos">
+                                            <p:menuitem value="Delete" actionListener="#{menuView.delete}"  ajax="false" />
+                                        </p:submenu>
+                                        
+                                    </p:slideMenu>
                                 </h:panelGrid>
                             </p:dialog>
                         </h:form>
@@ -74,7 +85,7 @@
                 </div>
                    
                  <div id="render" >
-                     <h:outputScript library="js" name="Three.js"/>
+                    <h:outputScript library="js" name="Three.js"/>
                     <h:outputScript library="js" name="Detector.js"/>
                     <h:outputScript library="js" name="Stats.js"/>
                     <h:outputScript library="js" name="OrbitControls.js"/>
@@ -89,12 +100,6 @@
                     </p:breadCrumb>
                      <h3 class="tituloDepa" align="center"><h:outputText style="color:red;" value="" ></h:outputText></h3>   
                     
-                    
-                         
-                     
-                     
-                    
-                        
                     </div>
                 <h:form id="formAnimacion">
                     <input type="hidden" id="NodosHijos" value="#{MbTree.nodoCentro}"></input>
