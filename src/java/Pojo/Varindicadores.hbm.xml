@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/02/2016 11:53:02 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Varindicadores" table="varindicadores" catalog="elipso" optimistic-lock="version">
+        <id name="idvarIndicadores" type="java.lang.Integer">
+            <column name="idvarIndicadores" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="indicadores" class="Pojo.Indicadores" fetch="select">
+            <column name="indicadores_idindicadores" not-null="true" />
+        </many-to-one>
+        <property name="periodo" type="timestamp">
+            <column name="periodo" length="19" />
+        </property>
+        <property name="variableIndicador" type="java.lang.Double">
+            <column name="variableIndicador" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

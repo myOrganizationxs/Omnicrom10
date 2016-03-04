@@ -11,10 +11,21 @@
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    
-                    
-                    <p:dataTable id="Financiera" var="p" value="#{mbPerspectivas.per}"  paginator="true" rows="10" >
+                
+    <h:form>                    
+        <p:dataTable id="Financiera" var="p" value="#{MbAltaObjetivo}"  paginator="true" rows="10" >
+        <f:facet name="header">
+            
+        </f:facet>    
+                                   
+    <p:column headerText="Objetivos" >
+        <p:commandButton value="Agregar Objetivo" onclick="PF('Aobj').show();"/>
+    </p:column>
+    </p:dataTable>
+    </h:form>
+                
+    <h:form>                    
+    <p:dataTable id="Financiera" var="p" value="#{mbPerspectivas.per}"  paginator="true" rows="10" >
         <f:facet name="header">
             <p:commandButton value="Perspectiva Financiera" actionListener="#{mbPerspectivas.financiera()}" update="Financiera"/>
             <p:commandButton value="Perspectiva Clientes" actionListener="#{mbPerspectivas.clientes()}" update="Financiera"/>
@@ -27,26 +38,24 @@
     <p:column headerText="Objetivos" >
         <p:commandButton value="Agregar Objetivo" onclick="PF('Aobj').show();"/>
     </p:column>
-    <p:column headerText="Indicadores">
-         <p:commandButton value="Agregar Indicador" onclick="PF('Aind').show();"/>
-    </p:column>
-    <p:column headerText="Meta" width="200">
-        <p:commandButton value="Agregar Meta" onclick="PF('Ameta').show();"/>
-    </p:column>       
-    
-    
-    <p:column headerText="grafica" width="200">
-        <p:commandLink value="grafica" oncomplete="PF('diagra').show();"></p:commandLink>
-    </p:column>
-</p:dataTable>
-                </h:form>
+    </p:dataTable>
+    </h:form>
                 
                 <h:form>
-                    <p:dialog header="Agregar Objetivo" widgetVar="Aobj" modal="true" height="200">
-                        <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
+                    <p:dialog header="Agregar Objetivo" widgetVar="Aobj" modal="true" height="300">
+                        <p:panelGrid columns="2">
+                        <p:outputLabel value="Nomenclatura"></p:outputLabel>
+                        <p:inputText value="#{MbAltaObjetivo.nickObjetivo}"></p:inputText>
+                        <p:outputLabel value="Nombre Objetivo"></p:outputLabel>
+                        <p:inputTextarea value="#{MbAltaObjetivo.nombreObjetivo}" rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
+                        <p:outputLabel value="Meta"></p:outputLabel>
+                        <p:inputText value="#{MbAltaObjetivo.meta}"></p:inputText>
                         <p></p>
-                        <p:commandButton  value="Guardar"></p:commandButton> 
+                        <p:commandButton  value="Guardar" action="#{MbAltaObjetivo.guardarObjetivo()}"></p:commandButton> 
+                        </p:panelGrid>
                     </p:dialog>
+                </h:form>
+                <h:form>
                     <p:dialog header="Agregar Indicador" widgetVar="Aind" modal="true" height="250">
                         <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
                         <p></p>
@@ -64,6 +73,8 @@
                         <p></p>
                         <p:commandButton  value="Guardar"></p:commandButton> 
                     </p:dialog>
+                </h:form>
+                <h:form>
                     <p:dialog header="Agregar Meta" widgetVar="Ameta" modal="true" height="200">
                         <p:inputTextarea rows="5" cols="30"  maxlength="255" counterTemplate="{0} Caracteres Faltantes" autoResize="true"  />
                         <p></p>
@@ -80,21 +91,10 @@
                                 <h:outputText style="margin-left: 35px;" value="+"></h:outputText>
                                 <h:inputText style="width:100px; margin-left: 35px;" value="hola"></h:inputText>
                             </p:column>
-                            <!--<p:column headerText="Operacion">
-                                <h:selectOneMenu id="txt3" value="#{selectorView.text3}" required="true" label="Text 3">
-                                    <f:selectItem itemLabel="Operacion" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Suma" itemValue="1" />
-                                    <f:selectItem itemLabel="Resta" itemValue="2" />
-                                    <f:selectItem itemLabel="Multiplicacion" itemValue="3" />
-                                    <f:selectItem itemLabel="Division" itemValue="4" />
-                                </h:selectOneMenu>
- 
-                            </p:column>
-                            <p:column headerText="Resultado">
-                                <p:commandButton value="Calcular"></p:commandButton>
-                            </p:column>-->
                         </p:dataTable>
                     </p:dialog>
+                    </h:form>
+                    <h:form>
                     <p:dialog  header="Calcular" modal="true" widgetVar="calc" width="800">
                         <p:dataTable value="" var="">
                             
@@ -122,9 +122,7 @@
                     
                     <p:dialog  header="Graficos" modal="true" widgetVar="diagra" width="400" >
                        <p:chart  type="bar" model="#{chartView.barModel}" style="background:red !important; height:300px; width:300px;"/>
-                   </p:dialog>
-                    
-                   
+                   </p:dialog>           
                 </h:form>
                 
             </ui:define>

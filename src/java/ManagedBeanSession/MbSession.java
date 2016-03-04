@@ -65,8 +65,10 @@ public class MbSession implements Serializable{
                     HttpSession httpSession=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);                    
                     httpSession.setAttribute("idcuenta", cuenta.getIdCuenta());                   
                     FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Correcto: ","Usuario Establecido"));
-                    return "interfazUsuario.xhtml?faces-redirect=true";
-                    
+
+                        return "interfazUsuario.xhtml?faces-redirect=true";
+
+
                 }
             }
             

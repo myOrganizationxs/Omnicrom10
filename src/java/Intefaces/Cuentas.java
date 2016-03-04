@@ -13,7 +13,7 @@ import org.hibernate.Session;
  *
  * @author sergio
  */
-public interface Cuentas 
+public interface Cuentas
 {
     public Cuenta getByUsuario(Session session,String Usuario)throws Exception;
     public List getByIdcuenta(Session session,Integer idcuenta)throws Exception;

@@ -7,6 +7,7 @@ package prueba.ejercicio;
 
 import Pojo.Cuenta;
 import Pojo.Mensajes;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  *
  * @author sergio
  */
-public class ejercicio 
+public class ejercicio implements Serializable
 {
     //from Cuenta c inner join c.usuarios u inner join u.nodo n inner join n.mensajeses where IdCuenta=0
     private Session sesion;
@@ -141,21 +142,13 @@ public class ejercicio
     
     public void añadirMensaje()
     {
-        try{
-            inciaOperacion();
-            mensajes = new Mensajes(null, Integer.SIZE, Integer.SIZE, null, null, null, null, null, Integer.MIN_VALUE, null, Integer.MIN_VALUE);
-            sesion.save(this.mensajes);
-            JOptionPane.showMessageDialog(null,"Mensaje guardado");
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error " + e);
-        }
+        
     }
     
     public static void main(String args[])
     {
         ejercicio eje = new ejercicio();
+       
         //eje.obtenNombres();
         //eje.obtenNombresYPasswords();
         //eje.obtenNombresYPasswordsComoMapa();
@@ -170,6 +163,5 @@ public class ejercicio
 
     public void setMensajes(Mensajes mensajes) {
         this.mensajes = mensajes;
-    }
-    
+    }    
 }

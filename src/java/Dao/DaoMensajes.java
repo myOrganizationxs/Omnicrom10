@@ -237,4 +237,127 @@ public class DaoMensajes implements IntMensajes{
         }
         return null;
     } 
+
+    @Override
+    public List<Object> getBandejaDeEntradaByEmisor(Session session, Integer Emisor) throws Exception {
+        try{
+            String hql="from Mensajes m inner join m.nodo n inner join n.usuarios where n.idNodo=:idNodo and m.estadoMensaje!=4";
+            Query query=session.createQuery(hql);
+            query.setParameter("idNodo", Emisor);;
+            List<Object> lista =(List<Object>)query.list(); 
+            //JOptionPane.showMessageDialog(null, lista);
+            return lista;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Object> getBandejaDeEntradaByEmisorSiCondicional(Session session, Integer Emisor) throws Exception {
+        try{
+            String hql="from Mensajes m inner join m.nodo n inner join n.usuarios where n.idNodo=:idNodo and m.estadoMensaje=4";
+            Query query=session.createQuery(hql);
+            query.setParameter("idNodo", Emisor);;
+            List<Object> lista =(List<Object>)query.list(); 
+            //JOptionPane.showMessageDialog(null, lista);
+            return lista;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
+    }
+
+    @Override
+    public Mensajes uploadMensajeFin(Mensajes mensajes, Session session, Transaction transaction) throws Exception {
+        //JOptionPane.showMessageDialog(null,"guardado correcto");
+        //el que manda int id
+        //Leido o No leido
+        mensajes.setEstadoMensaje(5);
+        //la hora que se envia
+        //hora cuando se acepta
+        //texto que se va a poner
+        //si no o no conidicional
+        // a quien le llega
+        //numero de revocaciones
+        //Variables para el programador
+        //variables para el programador      
+        //nodo
+        //Set<Mensajes> set2 = new HashSet<Mensajes>();
+        //set2.add(mensajes);
+        //JOptionPane.showMessageDialog(null,nodo+" "+nodo.getIdNodo()+" "+set2);
+        //nodo.setMensajeses(set2);       
+        //nodo.setCargo("hola a todos");
+        //session.saveOrUpdate(nodo);
+        session.update(mensajes);       
+        JOptionPane.showMessageDialog(null,"guardado correcto");
+        transaction.commit();  
+        session.close();
+        
+        return null; 
+    }
+
+    @Override
+    public List<Object> getBandejaDeEntradaByReceptorFin(Session session, Integer Receptor) throws Exception {
+        try{
+            String hql="from Mensajes m inner join m.nodo n inner join n.usuarios where m.receptor=:receptor and m.estadoMensaje=5";
+            Query query=session.createQuery(hql);
+            query.setParameter("receptor", Receptor);;
+            List<Object> lista =(List<Object>)query.list(); 
+            //JOptionPane.showMessageDialog(null, lista);
+            return lista;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Object> getBandejaDeEntradaByEmisorFin(Session session, Integer Emisor) throws Exception {
+        try{
+            String hql="from Mensajes m inner join m.nodo n inner join n.usuarios where n.idNodo=:idNodo and m.estadoMensaje=5";
+            Query query=session.createQuery(hql);
+            query.setParameter("idNodo", Emisor);;
+            List<Object> lista =(List<Object>)query.list(); 
+            //JOptionPane.showMessageDialog(null, lista);
+            return lista;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
+    }
+
+    @Override
+    public Mensajes uploadMensajeValorar(Mensajes mensajes, Session session, Transaction transaction,String valoracionS) throws Exception {
+       mensajes.setPromesa(valoracionS);
+        //la hora que se envia
+        //hora cuando se acepta
+        //texto que se va a poner
+        //si no o no conidicional
+        // a quien le llega
+        //numero de revocaciones
+        //Variables para el programador
+        //variables para el programador      
+        //nodo
+        //Set<Mensajes> set2 = new HashSet<Mensajes>();
+        //set2.add(mensajes);
+        //JOptionPane.showMessageDialog(null,nodo+" "+nodo.getIdNodo()+" "+set2);
+        //nodo.setMensajeses(set2);       
+        //nodo.setCargo("hola a todos");
+        //session.saveOrUpdate(nodo);
+        session.update(mensajes);       
+        JOptionPane.showMessageDialog(null,"guardado correcto");
+        transaction.commit();  
+        session.close();
+        
+        return null; 
+    }
 }

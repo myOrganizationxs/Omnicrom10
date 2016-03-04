@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./masterPage.xhtml">
+
+            <ui:define name="content">
+            
+                <h:form id="form">
+                    
+                    <p:panelGrid columns="2">
+                        
+                        <h:outputText></h:outputText>
+                        <h:outputText value="#{MbCuentaUsuario.todo}"></h:outputText>
+                        
+                        <h:outputText value="Id Cuenta"></h:outputText>
+                        <h:outputText value="#{MbCuentaUsuario.idCuenta}"></h:outputText>                        
+                        
+                        <h:outputText value="Usuario"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.usuario}"></h:inputText>
+                        
+                        <h:outputText value="Contraseña"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.contrasena}"></h:inputText>
+                        
+                        <h:outputText value="Nueva Contraseña"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.nuevaContrasena}"></h:inputText>
+                                              
+                        <h:outputText value="Nombre"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.nombre}"></h:inputText>
+                        
+                        <h:outputText value="Apellido Paterno"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.ap}"></h:inputText>
+                        
+                        <h:outputText value="Apellido Materno"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.am}"></h:inputText>
+                        
+                         <h:outputText value="fecha de nacimiento"></h:outputText>
+                        <p:calendar id="button" value="#{MbCuentaUsuario.fechaNacimiento}"  showOn="button" />
+                        
+                        <h:outputText value="Correo electronico"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.correo}"></h:inputText>
+                        
+                        <h:outputText value="Telefono"></h:outputText>
+                        <h:inputText value="#{MbCuentaUsuario.telefono}"></h:inputText>
+                        
+                        <h:inputHidden value="#{MbCuentaUsuario.idUsuario}"/>
+                        <p:commandButton value="Actualizar datos" action="#{MbCuentaUsuario.guardardatos()}" update=""/>
+                        
+                    </p:panelGrid>
+                           
+                   
+                </h:form>
+                
+                <h:form id="foto" enctype="multipart/form-data">
+                    <div id="c-foto">    
+                        <p:graphicImage style="border-radius: 200px;" width="300px" height="300px" value="#{FacesContext.getCurrentInstance().getExternalContext()}/fotoUsuario/#{MbFoto.idFoto}.png"></p:graphicImage>
+                    </div>    
+                    <p:fileUpload id="fotox" value="#{MbFoto.foto}" mode="simple" /> 
+                        <p:commandButton value="Actualizar foto" ajax="false" actionListener="#{MbFoto.actualizarFoto()}"/>
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/02/2016 11:53:02 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojo.Indicadores" table="indicadores" catalog="elipso" optimistic-lock="version">
+        <id name="idindicadores" type="java.lang.Integer">
+            <column name="idindicadores" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="objetivos" class="Pojo.Objetivos" fetch="select">
+            <column name="Objetivos_idObjetivos" not-null="true" />
+        </many-to-one>
+        <property name="nombreIndicador" type="string">
+            <column name="nombreIndicador" length="45" />
+        </property>
+        <property name="nickIndicador" type="string">
+            <column name="NickIndicador" length="10" />
+        </property>
+        <property name="nombreFormula" type="string">
+            <column name="nombreFormula" length="100" />
+        </property>
+        <property name="porcentaje" type="java.lang.Integer">
+            <column name="porcentaje" />
+        </property>
+        <set name="varindicadoreses" table="varindicadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="indicadores_idindicadores" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.Varindicadores" />
+        </set>
+    </class>
+</hibernate-mapping>

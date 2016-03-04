@@ -28,4 +28,10 @@ public interface IntMensajes {
     public List getBandejaDeEntradaByReceptorNo(Session session,Integer idcuenta)throws Exception;
     public Mensajes uploadMensajeSiCondicional(Mensajes mensajes,Session session,Transaction transaction,Date date)throws Exception;
     public List getBandejaDeEntradaByReceptorSiCOndicional(Session session,Integer idcuenta)throws Exception;
+    public List<Object> getBandejaDeEntradaByEmisor(Session session,Integer Emisor)throws Exception;
+    public List<Object> getBandejaDeEntradaByEmisorSiCondicional(Session session,Integer Emisor)throws Exception;
+    public Mensajes uploadMensajeFin(Mensajes mensajes,Session session,Transaction transaction)throws Exception;
+    public List<Object> getBandejaDeEntradaByReceptorFin(Session session,Integer Receptor)throws Exception;
+    public List<Object> getBandejaDeEntradaByEmisorFin(Session session,Integer Emisor)throws Exception;
+    public Mensajes uploadMensajeValorar(Mensajes mensajes,Session session,Transaction transaction,String valoracionS)throws Exception;
 }

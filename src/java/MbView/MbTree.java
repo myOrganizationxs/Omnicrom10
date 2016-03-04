@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Object;
+import java.util.Iterator;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -52,6 +54,8 @@ public class MbTree implements Serializable
     private String[][] matrizArbol;
     private String Dep="Departamento X";
     private int suma=123;
+    private TreeNode nodoSelect;
+    private String prueba;
  //dasdasd
     public MbTree() throws Exception 
     { 
@@ -64,24 +68,25 @@ public class MbTree implements Serializable
         this.transaction=this.session.beginTransaction(); 
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);   
         liste=daoNodo.getByOrganizacion(session,(Integer) sessionUsuario.getAttribute("idorganizacion"),0);
-        
+        //JOptionPane.showMessageDialog(null, liste);
         NumeroDeNodos=(Integer) sessionUsuario.getAttribute("idNodo");
         
         for(Object[] itr:liste)
         {
-            donanim=new DefaultTreeNode(itr[1], root);
+            donanim=new DefaultTreeNode(itr, root);
             idNodo=(int) itr[0];            
         }
         recursive(liste,idNodo,donanim);  
     }
-    public  void recursive(List<Object[]> lista, int id,TreeNode node) throws Exception{
+    public  void recursive(List<Object[]> lista, int id,TreeNode node) throws Exception
+    {
         
         HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         lista=daoNodo.getByOrganizacion(session,(Integer) sessionUsuario.getAttribute("idorganizacion"),id);
         for(Object[] n:lista)
         {
 
-                TreeNode childNode=new DefaultTreeNode(n[1], node);
+                TreeNode childNode=new DefaultTreeNode(n, node);
                 idNodo=(int) n[0];    
                 recursive(lista,idNodo,childNode);
 
@@ -100,6 +105,7 @@ public class MbTree implements Serializable
             this.session=HibernateUtil.getSessionFactory().openSession();
             this.transaction=this.session.beginTransaction();          
             HttpSession sessionUsuario=(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            //JOptionPane.showMessageDialog(null, NumeroDeNodos);
             ListaNodosHijos=daoNodo.getByIdNodo(session, NumeroDeNodos,(Integer) sessionUsuario.getAttribute("idorganizacion"));
             //Gson gson= new Gson();
             //gson.toJson(ListaNodosHijos);  
@@ -124,11 +130,20 @@ public class MbTree implements Serializable
         }
     }
     
-    public void onNodeSelect(NodeSelectEvent event){
-        //JOptionPane.showMessageDialog(null, "Node Data ::"+singleSelectedTreeNode+" :: Selected");
+    public void onNodeSelect(NodeSelectEvent event)
+    {   
+        
+        //Object obj = singleSelectedTreeNode;
+        JOptionPane.showMessageDialog(null, "Node Data ::"+suma+" :: Selected ");
         suma++;
         //buscar por nombre de nodo
     }
+    public void pruebass()
+    {
+        JOptionPane.showMessageDialog(null,prueba);
+        
+    }
+    
     
     public TreeNode getRoot() {
         return root;
@@ -197,5 +212,22 @@ public class MbTree implements Serializable
     public void setDep(String Dep) {
         this.Dep = Dep;
     }
+
+    public TreeNode getNodoSelect() {
+        return nodoSelect;
+    }
+
+    public void setNodoSelect(TreeNode nodoSelect) {
+        this.nodoSelect = nodoSelect;
+    }
+
+    public String getPrueba() {
+        return prueba;
+    }
+
+    public void setPrueba(String prueba) {
+        this.prueba = prueba;
+    }
+
     
 }

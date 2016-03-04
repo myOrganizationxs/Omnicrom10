@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 25/02/2016 11:53:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.Objetivos" table="objetivos" catalog="elipso" optimistic-lock="version">
         <id name="idObjetivos" type="java.lang.Integer">
@@ -9,16 +9,22 @@
             <generator class="identity" />
         </id>
         <many-to-one name="orbita" class="Pojo.Orbita" fetch="select">
-            <column name="Orbita_idOrbita" not-null="true" />
+            <column name="orbita_idOrbita" not-null="true" />
         </many-to-one>
         <property name="nombreObjetivo" type="string">
-            <column name="Nombre_objetivo" length="45" />
+            <column name="nombreObjetivo" length="45" />
         </property>
-        <property name="indicador" type="string">
-            <column name="Indicador" length="45" />
+        <property name="nickObjetivo" type="string">
+            <column name="nickObjetivo" length="10" />
         </property>
-        <property name="tipoObjetivo" type="java.lang.Integer">
-            <column name="Tipo_objetivo" />
+        <property name="meta" type="string">
+            <column name="meta" length="80" />
         </property>
+        <set name="indicadoreses" table="indicadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Objetivos_idObjetivos" not-null="true" />
+            </key>
+            <one-to-many class="Pojo.Indicadores" />
+        </set>
     </class>
 </hibernate-mapping>

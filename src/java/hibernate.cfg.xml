@@ -6,15 +6,17 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/elipso</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">123456</property>   
+    <property name="hibernate.connection.password">123456</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="Pojo/Orbita.hbm.xml"/>
-    <mapping resource="Pojo/Cuenta.hbm.xml"/>
-    <mapping resource="Pojo/Objetivos.hbm.xml"/>
-    <mapping resource="Pojo/Nodo.hbm.xml"/>
-    <mapping resource="Pojo/Mensajes.hbm.xml"/>
-    <mapping resource="Pojo/Organizacion.hbm.xml"/>
+    <mapping resource="Pojo/Indicadores.hbm.xml"/>
     <mapping resource="Pojo/Usuario.hbm.xml"/>
+    <mapping resource="Pojo/Nodo.hbm.xml"/>
+    <mapping resource="Pojo/Varindicadores.hbm.xml"/>
+    <mapping resource="Pojo/Orbita.hbm.xml"/>
+    <mapping resource="Pojo/Organizacion.hbm.xml"/>
+    <mapping resource="Pojo/Cuenta.hbm.xml"/>
+    <mapping resource="Pojo/Mensajes.hbm.xml"/>
+    <mapping resource="Pojo/Objetivos.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -3,47 +3,127 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./masterPage.xhtml">
 
             <ui:define name="content">
-                <h3 align="center">Bandeja de Salida</h3>
-    <p:dataTable var="" value="">
+    <h3 align="center">Mensajes enviados</h3>
+    <p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaEmisor}">
     
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
                         
     <p:column headerText="Mensaje/peticion">
-        <p:commandLink update="display" oncomplete="PF('dlg').show()" value="Diseño de las interfaces" />
-        <p:dialog modal="true" resizable="false" widgetVar="dlg" header="Descripcion del mensaje" showEffect="clip">
-        
-        <h:outputText id="display" value="Un super texto con toda la descripcion de la peticion" />
-        </p:dialog>
+        <h:outputText value="#{item[0].peticion} " />
     </p:column>
         
     <p:column headerText="Fecha y hora de envio">
-        <h:outputText value="12/12/15 11:30" />
+        <h:outputText value="#{item[0].horaEnvio}" />
     </p:column>
                         
-    <p:column headerText="Fecha y hora de cumplimiento">
-        <h:outputText value="13/12/15 17:00" />
+    <p:column headerText="Fecha y hora que fueron propuestas">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+    
+    <p:column headerText="Nueva fecha y hora a cumplir">
+        <h:outputText value="#{item[0].tiempoProceso}" />
     </p:column>
                         
     <p:column headerText="Tiempo Restante">
         <h:outputText value="1 dia con x horas" />
     </p:column>
-                        
-         <p:column headerText=" barra de Estado">
-        <p:progressBar widgetVar="pbAjax" ajax="true" value="50" labelTemplate="" styleClass="animated" global="true"/>
+     <p:column headerText="Estado mensaje">
+        <h:outputText value="#{item[0].estadoMensaje}" />
     </p:column>
-                        
-         <p:column headerText="Respuesta">
-         <p:commandButton value="aceptar"></p:commandButton>
-         </p:column>
+                               
 </p:dataTable>
                 
+    <h3 align="center">Si Condicional</h3>
+    <p:dataTable var="item" paginator="true" rows="3" value="#{MbEnviarMensaje.byListaEmisorSiCondicional}">
     
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
+                        
+    <p:column headerText="Mensaje/peticion">
+        <h:outputText value="#{item[0].peticion} " />
+    </p:column>
+        
+    <p:column headerText="Fecha y hora de envio">
+        <h:outputText value="#{item[0].horaEnvio}" />
+    </p:column>
+                        
+    <p:column headerText="Fecha y hora de cumplimiento">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+                        
+    <p:column headerText="Tiempo Restante">
+        <h:outputText value="1 dia con x horas" />
+    </p:column>
+    <p:column headerText="¿Aceptas?">
+    <h:form id="formAceptar">
+        <p:selectOneRadio id="Promesa" value="#{MbEnviarMensaje.promesa}" layout="grid" columns="1">
+            <f:selectItem itemLabel="Si" itemValue="1"  />
+            <f:selectItem itemLabel="No" itemValue="2" />        
+        </p:selectOneRadio>
+        
+         <p:commandButton value="Aceptar" update="formAceptar" oncomplete="#{MbEnviarMensaje.responderMensaje}">
+             <f:setPropertyActionListener value="#{item[0].idMensajes}" target="#{MbEnviarMensaje.targerMensaje}" />
+         </p:commandButton>
+         
+    </h:form>    
+        </p:column>     
+                               
+</p:dataTable>
+    <h3 align="center">Proceso Finalizado</h3>
+    <p:dataTable var="item" paginator="true" rows="2" value="#{MbEnviarMensaje.byListaEmisorFin}">
+    
+    <p:column headerText="ID">
+        <h:outputText value="#{item[0].idMensajes} " />
+    </p:column>
+    
+    <p:column headerText="Emisor">
+        <h:outputText value="#{item[2].nombreUsu} " /><h:outputText value="#{item[2].apellidoPaterno} " /> <h:outputText value="#{item[2].apellidoMaterno}" />
+    </p:column>
+                        
+    <p:column headerText="Mensaje/peticion">
+        <h:outputText value="#{item[0].peticion} " />
+    </p:column>
+        
+    <p:column headerText="Fecha y hora de envio">
+        <h:outputText value="#{item[0].horaEnvio}" />
+    </p:column>
+                        
+    <p:column headerText="Fecha y hora que fueron propuestas">
+        <h:outputText value="#{item[0].horaRecibido}" />
+    </p:column>
+    
+    <p:column headerText="Nueva fecha y hora a cumplir">
+        <h:outputText value="#{item[0].tiempoProceso}" />
+    </p:column>
+    <p:column headerText="Nueva fecha y hora a cumplir">
+        <form>
+        <p:rating value="#{MbEnviarMensaje.valor}"/>
+            <p:commandButton value="Valorar" action="#{MbEnviarMensaje.peticionValoracion()}">
+               <f:setPropertyActionListener value="#{item[0].idMensajes}" target="#{MbEnviarMensaje.targerMensaje}" />
+            </p:commandButton>
+        </form>
+    </p:column>
+        
+</p:dataTable>
             </ui:define>
 
         </ui:composition>

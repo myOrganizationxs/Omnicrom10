@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/08/2015 01:16:26 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 25/02/2016 11:53:02 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Pojo.Orbita" table="orbita" catalog="elipso" optimistic-lock="version">
         <id name="idOrbita" type="java.lang.Integer">
@@ -25,7 +25,7 @@
         </property>
         <set name="objetivoses" table="objetivos" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="Orbita_idOrbita" not-null="true" />
+                <column name="orbita_idOrbita" not-null="true" />
             </key>
             <one-to-many class="Pojo.Objetivos" />
         </set>

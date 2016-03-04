@@ -5,15 +5,16 @@
  */
 package Intefaces;
 
-import Pojo.Nodo;
-import java.util.List;
+import Pojo.Objetivos;
+import Pojo.Orbita;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author sergio
  */
-public interface Orbitas 
+public interface ObjObjetivos 
 {
-    public String getByIdNodoOrg(Session session,int IdNodo)throws Exception;  
+    public Objetivos saveObjetivos(Session session, Transaction transaction,Orbita orbita,String nombreObj,String metaObj,String NickObj);
 }

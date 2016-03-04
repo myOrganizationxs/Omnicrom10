@@ -5,7 +5,7 @@
  */
 package Dao;
 
-import Intefaces.Orbitas;
+import Intefaces.IntOrbitas;
 import Pojo.Nodo;
 import Pojo.Orbita;
 import java.util.List;
@@ -16,19 +16,19 @@ import org.hibernate.Session;
  *
  * @author sergio
  */
-public class DaoOrbita implements Orbitas
+public class DaoOrbita implements IntOrbitas
 {
 
     @Override
-    public String getByIdNodoOrg(Session session,int IdNodo) throws Exception {
+    public Orbita getByIdNodoOrg(Session session,int IdNodo) throws Exception {
         try 
         {
             //select object(o) from Nodo as o            
-            String hql="Select o.nombreDepartamento from Nodo n inner join n.orbitas o where IdNodo=:IdNodo";
+            String hql="Select o from Nodo n inner join n.orbitas o where IdNodo=:IdNodo";
             Query query=session.createQuery(hql);
             query.setParameter("IdNodo",IdNodo);  
-            String nombredep =(String) query.uniqueResult();    
-            return nombredep;
+            Orbita orbita =(Orbita) query.uniqueResult();    
+            return orbita;
         }
         catch(Exception e)
         {
